@@ -1,0 +1,11 @@
+#php_value display_errors 1
+#php_value display_startup_errors 1 
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)? index.php/$1 [L] 
+
+</IfModule>
