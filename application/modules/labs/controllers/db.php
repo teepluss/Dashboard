@@ -12,6 +12,7 @@ class Db extends MY_Controller {
 		$sql = CIDb::select();
 		$sql->from('sample');
 		$data = CIDb::fetchAll($sql);
+		// OK
 	}
 	
 }
