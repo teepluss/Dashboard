@@ -1,7 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /* load the MX_Loader class */
-require APPPATH."third_party/MX/Controller.php";
+require_once(APPPATH.'third_party/MX/Controller.php');
 
 abstract class MY_Controller extends MX_Controller {
 
