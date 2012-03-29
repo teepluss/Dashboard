@@ -8,4 +8,4 @@
  * @var mixed
  * @access public
  */
-$route['api/([a-z]+)(.*)?'] = "$1_rest/$1$2";
+$route['api/([a-z]+)(.*)?'] = "$1_rest/action$2";

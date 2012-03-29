@@ -14,11 +14,12 @@
  * @author		Phil Sturgeon
  * @link		http://philsturgeon.co.uk/code/
 */
-class Example_rest extends REST_Controller
-{
-	public function example_get()
+class Example_rest extends REST_Controller {
+
+	public function action_get()
     {
-         // $user = $this->some_model->getSomething( $this->get('id') );
+        // $user = $this->some_model->getSomething( $this->get('id') );
+
     	$users = array(
 			1 => array('id' => 1, 'name' => 'Some Guy', 'email' => 'example1@example.com', 'fact' => 'Loves swimming'),
 			2 => array('id' => 2, 'name' => 'Person Face', 'email' => 'example2@example.com', 'fact' => 'Has a huge face'),
@@ -42,11 +43,11 @@ class Example_rest extends REST_Controller
 
         else
         {
-            $this->response(array('error' => 'User could not be found'), 404);
+            throw new Exception('User not found', 404);
         }
     }
     
-    public function example_post()
+    public function action_post()
     {
         //$this->some_model->updateUser( $this->get('id') );
         $message = array(
@@ -59,7 +60,7 @@ class Example_rest extends REST_Controller
         $this->response($message, 200); // 200 being the HTTP response code
     }
     
-    public function example_delete()
+    public function action_delete()
     {
     	//$this->some_model->deletesomething( $this->get('id') );
         $message = array(
@@ -71,7 +72,7 @@ class Example_rest extends REST_Controller
     }
 
 
-	public function example_put()
+	public function action_put()
 	{
 		var_dump($this->put('foo'));
 	}

@@ -117,6 +117,7 @@ class REST_Controller extends MX_Controller {
 
 		// Which format should the data be returned in?
 		$this->response = new stdClass();
+
 		$this->response->format = $this->_detect_output_format();
 
 		// Which language should the data be returned in?
@@ -231,8 +232,18 @@ class REST_Controller extends MX_Controller {
 			$this->_log_request($authorized = TRUE);
 		}
 
-		// And...... GO!
-		call_user_func_array(array($this, $controller_method), $arguments);
+		// Detect throw exception and then GO!
+		try {
+			call_user_func_array(array($this, $controller_method), $arguments);
+		} 
+		catch (Exception $e) {
+			$err_msgn = $e->getMessage();
+			$err_code = ($e->getCode()) ? $e->getCode() : 401;
+			$this->response(array(
+				'status' => false,
+				'error'  => $err_msgn
+			), $err_code);
+		}
 	}
 
 	/*
