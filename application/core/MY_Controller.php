@@ -15,7 +15,6 @@ abstract class MY_Controller extends MX_Controller {
 		$this->_controller = $this->uri->segment(1);
 		$this->_method = $this->uri->segment(2);
 		
-		
 		// acl code here
 	}
 	
