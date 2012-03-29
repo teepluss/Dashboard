@@ -6,6 +6,8 @@
  * This is an example of a few basic user interaction methods you could use
  * all done with a hardcoded array.
  *
+ * example call: http://domain.com/api/example/id/1/format/json
+ *
  * @package		CodeIgniter
  * @subpackage	Rest Server
  * @category	Controller
@@ -16,13 +18,7 @@ class Example_rest extends REST_Controller
 {
 	public function example_get()
     {
-        if(!$this->get('id'))
-        {
-        	//$this->response(NULL, 400);
-        	$this->response(array('error' => 'Missing ID parameter'), 400);
-        }
-
-        // $user = $this->some_model->getSomething( $this->get('id') );
+         // $user = $this->some_model->getSomething( $this->get('id') );
     	$users = array(
 			1 => array('id' => 1, 'name' => 'Some Guy', 'email' => 'example1@example.com', 'fact' => 'Loves swimming'),
 			2 => array('id' => 2, 'name' => 'Person Face', 'email' => 'example2@example.com', 'fact' => 'Has a huge face'),
@@ -30,6 +26,12 @@ class Example_rest extends REST_Controller
 				'hobbies' => array('fartings', 'bikes')
 			))
 		);
+		
+		if (!$this->get('id'))
+        {
+        	//$this->response(NULL, 400);
+        	$this->response($users, 400);
+        }
 		
     	$user = @$users[$this->get('id')];
     	
