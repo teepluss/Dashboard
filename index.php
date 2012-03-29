@@ -191,6 +191,14 @@ if (defined('ENVIRONMENT'))
 		define('APPPATH', BASEPATH.$application_folder.'/');
 	}
 
+
+/*
+ * -------------------------------------------------------------------
+ *  Set include path
+ * -------------------------------------------------------------------
+ */
+	ini_set('include_path', ini_get('include_path').PATH_SEPARATOR.APPPATH.'classes');
+
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE
