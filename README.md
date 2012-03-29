@@ -1,1 +1,1 @@
-Require Zend Installed
+Require [Zend](http://framework.zend.com/download/current/) Installed
