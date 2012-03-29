@@ -1,6 +1,7 @@
-## Introduce
+# CodeIgniter Modified by Tee++; v0.1b
 
-CodeIgniter Modified by Tee++; v0.1b
+A Framework CodeIgniter Modified
+
 1. Integrate [Modular Extension HMVC](http://codeigniter.com/wiki/Modular_Extensions_-_HMVC)
 2. Integrate Zend Framework
 3. Add Utilities
