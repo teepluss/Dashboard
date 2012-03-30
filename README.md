@@ -43,3 +43,7 @@ Easy install
 6. Add Util to control JS and CSS
 7. Add Less CSS
 9. Add Coffee Script
+
+## What It's hard to do?
+
+1. Create user guide, manual or something like that to make everybody clear what I am doing.
