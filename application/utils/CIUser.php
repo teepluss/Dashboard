@@ -2,47 +2,20 @@
 
 class CIUser {
 
-	public static function getInfo($id)
-	{
-		$data = array(
-			'id'       => 1,
-			'name'     => "Pattanai",
-			'nickname' => "Tee++;",
-			'website'  => "http://www.jquerytips.com"			
-		);
-		return new CIUserAttibutes($data);
-	}
-	
-	public static function getAuthInfo()
-	{
-		return "Get User Who Logged In Info.";
-	}
-	
-}
+	public static $CI;
 
-class CIUserAttibutes {
+	public function __construct()
+	{
+		self::$CI =& get_instance();
+	}
 
-	private $_user_info;
-	
-	public function __construct($user_info)
+	public static function authInfo()
 	{
-		$this->_user_info = $user_info;
 	}
-	
-	public function getAttrs()
+
+	public static function info($id)
 	{
-		if (is_array($this->_user_info)) {
-			return $this->_user_info;
-		}
-		return;
-	}
-	
-	public function getAttr($attr)
-	{
-		if (array_key_exists($attr, $this->_user_info)) {
-			return $this->_user_info[$attr];
-		}
-		return;
+		
 	}
 	
 }

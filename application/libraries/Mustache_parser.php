@@ -2,8 +2,13 @@
 
 require_once('Mustache/Mustache.php');
 
+/**
+ * Mustache template parser
+ * 
+ * @extends Mustache
+ */
 class Mustache_parser extends Mustache {
-	
+
 	public static $CI;
 
 	public function __construct()
@@ -11,6 +16,15 @@ class Mustache_parser extends Mustache {
 		self::$CI =& get_instance();
 	}
 
+	/**
+	 * Parse view
+	 * 
+	 * @access public
+	 * @param  string (path)
+	 * @param  array
+	 * @param  bool
+	 * @return string HTML
+	 */
 	public function parse($template, $data=array(), $return=false)
 	{
 		$v = self::$CI->load->view($template, '', true);

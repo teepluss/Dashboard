@@ -66,7 +66,7 @@ $autoload['libraries'] = array('template');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'common');
+$autoload['helper'] = array('common');
 
 
 /*
@@ -119,11 +119,11 @@ $autoload['model'] = array();
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['utils'] = array('user');
+|	$autoload['utils'] = array('CIUrl', 'CIDb');
 |
 */
 
-$autoload['utils'] = array('user', 'db');
+$autoload['utils'] = array('CIDb', 'CIUrl');
 
 
 /* End of file autoload.php */

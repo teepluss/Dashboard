@@ -1,8 +1,15 @@
 <?php
 
 require_once('Twig/Autoloader.php'); 
+
+/**
+ * Register all stuff 
+ */
 Twig_Autoloader::register();
 
+/**
+ * Twig template parser
+ */
 class Twigy_parser {
 
 	public static $CI;
@@ -13,14 +20,18 @@ class Twigy_parser {
 	{
 		$loader = new Twig_Loader_String();
 		self::$twig = new Twig_Environment($loader);
-		self::$CI =& get_instance();	
-		
-		/**
-		 * How to add global
-		 */	
-		self::$twig->addGlobal('any', new Twigy_tools);
+		self::$CI =& get_instance();
 	}
-
+	
+	/**
+	 * Parse view
+	 * 
+	 * @access public
+	 * @param  string (path)
+	 * @param  array
+	 * @param  bool
+	 * @return string HTML
+	 */
 	public function parse($template, $data=array(), $return=false)
 	{
 		$data = (array)$data;
@@ -33,27 +44,6 @@ class Twigy_parser {
 			$this->_obj->output->append_output($t);
 		}
 		return $t;
-	}
-	
-}
-
-/**
- * Any load anything from CI environment.
- */
-class Twigy_tools {
-
-	public function helper($what)
-	{
-		$args = func_get_args();
-		unset($args[0]);
-		return call_user_func_array($what, $args);
-	}
-	
-	public function util($what)
-	{
-		$args = func_get_args();
-		unset($args[0]);
-		return call_user_func($what, $args);
 	}
 	
 }

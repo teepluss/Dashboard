@@ -5,6 +5,13 @@ require_once('Zend/Db/Expr.php');
 require_once('Zend/Db.php');
 
 class CIDb {
+
+	public static $conn;
+	
+	public static $dbProfiles = array(
+		'master' => 'master',
+		'slave'  => 'slave'
+	);
 	
 	/**
 	 * Connect to the DB.
@@ -14,12 +21,13 @@ class CIDb {
 	 * @param  string 
 	 * @return object
 	 */
-	public static function conn($profile='slave')
+	public static function connect($profile)
 	{
 		if (!Zend_Registry::isRegistered('dbProfile_'.$profile)) {
 			self::setDbProfile($profile);
 		}
-		return Zend_Registry::get('dbProfile_'.$profile);
+		self::$conn = Zend_Registry::get('dbProfile_'.$profile);
+		return true;
 	}
 	
 	/**
@@ -36,6 +44,8 @@ class CIDb {
 		if (is_null($group) || !array_key_exists($group, $db)) {
 			throw new Exception('DB Profile not found!');
 		}
+		
+		$group = self::$dbProfiles[$group];
 		
 		$dbConf = $db[$group];
 		$dbDriver = $dbConf['dbdriver'];
@@ -79,7 +89,8 @@ class CIDb {
 	 */
 	public static function query($sql, $attrs=array())
 	{
-		return self::conn('master')->query($sql, $attrs);
+		self::connect('master');
+		return self::$conn->query($sql, $attrs);
 	}
 	
 	/**
@@ -93,8 +104,9 @@ class CIDb {
 	 */
 	public static function insert($table, $data)
 	{
-		if (self::conn('master')->insert($table, $data)) {
-			return self::conn('master')->lastInsertId();
+		self::connect('master');
+		if (self::$conn->insert($table, $data)) {
+			return self::$conn->lastInsertId();
 		}
 		return false;
 	}
@@ -110,7 +122,8 @@ class CIDb {
 	 */
 	public static function update($table, $data, $where)
 	{
-		return self::conn('master')->update($table, $data, $where);
+		self::connect('master');
+		return self::$conn->update($table, $data, $where);
 	}
 	
 	/**
@@ -124,7 +137,8 @@ class CIDb {
 	 */
 	public static function delete($table, $where)
 	{
-		return self::conn('master')->delete($table, $where);
+		self::connect('master');
+		return self::$conn->delete($table, $where);
 	}
 	
 	/**
@@ -136,7 +150,8 @@ class CIDb {
 	 */
 	public static function select()
 	{
-		return self::conn('slave')->select();
+		self::connect('slave');
+		return self::$conn->select();
 	}
 
 	/**
@@ -150,7 +165,8 @@ class CIDb {
 	 */
 	public static function quote($value, $type=null)
 	{
-		return self::conn('slave')->quote($value, $type);
+		self::connect('slave');
+		return self::$conn->quote($value, $type);
 	}
 	
 	/**
@@ -166,7 +182,8 @@ class CIDb {
 	 */
 	public static function quoteInto($text, $value, $type= null, $count=null)
 	{
-		return self::conn('slave')->quoteInto($text, $value, $type, $count);
+		self::connect('slave');
+		return self::$conn->quoteInto($text, $value, $type, $count);
 	}
 	
 	/**
@@ -179,7 +196,8 @@ class CIDb {
 	 */
 	public static function quoteIdentifier($text)
 	{
-		return self::conn('slave')->quoteIdentifier($text);
+		self::connect('slave');
+		return self::$conn->quoteIdentifier($text);
 	}
 
 	/**
@@ -193,7 +211,8 @@ class CIDb {
 	 */
 	public static function fetchAll($sql, $attrs=array())
 	{
-		return self::conn('slave')->fetchAll($sql, $attrs);
+		self::connect('slave');
+		return self::$conn->fetchAll($sql, $attrs);
 	}
 
 	/**
@@ -207,7 +226,8 @@ class CIDb {
 	 */
 	public static function fetchRow($sql, $attrs=array())
 	{
-		return self::conn('slave')->fetchRow($sql, $attrs);
+		self::connect('slave');
+		return self::$conn->fetchRow($sql, $attrs);
 	}
 
 	/**
@@ -221,7 +241,8 @@ class CIDb {
 	 */
 	public static function fetchOne($sql, $attrs=array())
 	{
-		return self::conn('slave')->fetchOne($sql, $attrs);
+		self::connect('slave');
+		return self::$conn->fetchOne($sql, $attrs);
 	}
 
 	/**
@@ -235,7 +256,8 @@ class CIDb {
 	 */
 	public static function fetchCol($sql, $attrs=array())
 	{
-		return self::conn('slave')->fetchCol($sql, $attrs);
+		self::connect('slave');
+		return self::$conn->fetchCol($sql, $attrs);
 	}
 
 	/**
@@ -249,7 +271,8 @@ class CIDb {
 	 */
 	public static function fetchPairs($sql, $attrs=array())
 	{
-		return self::conn('slave')->fetchPairs($sql, $attrs);
+		self::connect('slave');
+		return self::$conn->fetchPairs($sql, $attrs);
 	}
 
 	/**

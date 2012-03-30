@@ -44,46 +44,67 @@ class MY_Loader extends MX_Loader {
 		parent::initialize($controller);
 		
 		// config utils path and check autoloading
-		$this->_ci_utils_paths = array(APPPATH, BASEPATH);
+		$this->_ci_utils_paths = array(APPPATH);
 		$this->_ci_utils_autoloader();
 	}
 	
 	/**
-	 * Load Util
-	 *
-	 * This function loads the specified util file.
+	 * Load Utility
 	 *
 	 * @param	mixed
 	 * @return	void
 	 */
-	public function util($utils=array())
+	public function util($utils, $params=array())
 	{
-		if (is_array($utils)) return $this->_utils($utils);
+		if (is_array($utils)) return $this->utils($utils);
+		
+		$util = $utils;
 		
 		// if util already loaded
-		if (isset($this->_ci_utils[$utils])) {
-			return;
+		if (isset($this->_ci_utils[$util]) and $_alias = $this->_ci_utils[$util]) {
+			return CI::$APP->$_alias;
 		}
 		
+		$_alias = $util;
+		
 		// find the module util existing
-		list($path, $_util) = Modules::find('CI'.ucfirst($utils), $this->_module, 'utils/');
+		list($path, $_util) = Modules::find($util, $this->_module, 'utils/');
 		
 		// if the path not found try to normal load
 		if ($path === false)
 		{		
-			return $this->_util($utils);
+			foreach ($this->_ci_utils_paths as $path)
+			{
+				if (file_exists($path.'utils/'.$util.'.php'))
+				{
+					include_once($path.'utils/'.$util.'.php');
+					
+					CI::$APP->$_alias = new $util($params);
+
+					$this->_ci_utils[$util] = $_alias;
+					log_message('debug', 'Util loaded: '.$util);
+					break;
+				}
+			}
 		}
+		else
+		{
+			// if the path found try to load from module
+			Modules::load_file($_util, $path);
+			CI::$APP->$_alias = new $util($params);
+			$this->_ci_utils[$_util] = $_alias;
+		}		
 		
-		// if the path found try to load from module
-		Modules::load_file($_util, $path);
-		$this->_ci_helpers[$_util] = TRUE;
+		// unable to load the util
+		if ( ! isset($this->_ci_utils[$util]))
+		{
+			show_error('Unable to load the requested file: utils/'.$util.'.php');
+		}		
+		return CI::$APP->$_alias;
 	}
 	
 	/**
-	 * Load Utils
-	 *
-	 * This is simply an alias to the above function in case the
-	 * user has written the plural form of this function.
+	 * Load Utilities
 	 *
 	 * @param	array
 	 * @return	void
@@ -92,102 +113,9 @@ class MY_Loader extends MX_Loader {
 	{
 		foreach ($utils as $_util) $this->util($_util);	
 	}
-	
+
 	/**
-	 * Load Util
-	 *
-	 * This function loads the specified util file.
-	 * This is core function to really file.
-	 *
-	 * @access  protected
-	 * @param	mixed
-	 * @return	void
-	 */
-	protected function _util($utils = array())
-	{
-		foreach ($this->_ci_prep_filename($utils, 'CI', true) as $util)
-		{
-			if (isset($this->_ci_utils[$util]))
-			{
-				continue;
-			}
-
-			$ext_util = APPPATH.'utils/'.config_item('subclass_prefix').$util.'.php';
-
-			// Is this a util extension request?
-			if (file_exists($ext_util))
-			{
-				$base_util = BASEPATH.'utils/'.$util.'.php';
-
-				if ( ! file_exists($base_util))
-				{
-					show_error('Unable to load the requested file: utils/'.$util.'.php');
-				}
-
-				include_once($ext_util);
-				include_once($base_util);
-
-				$this->_ci_utils[$util] = TRUE;
-				log_message('debug', 'util loaded: '.$util);
-				continue;
-			}
-
-			// Try to load the util
-			foreach ($this->_ci_utils_paths as $path)
-			{
-				if (file_exists($path.'utils/'.$util.'.php'))
-				{
-					include_once($path.'utils/'.$util.'.php');
-
-					$this->_ci_utils[$util] = TRUE;
-					log_message('debug', 'Util loaded: '.$util);
-					break;
-				}
-			}
-
-			// unable to load the util
-			if ( ! isset($this->_ci_utils[$util]))
-			{
-				show_error('Unable to load the requested file: utils/'.$util.'.php');
-			}
-		}
-	}
-	
-	/**
-	 * Prep filename
-	 * Override from parent
-	 *
-	 * This function preps the name of various items to make loading them more reliable.
-	 *
-	 * @param	mixed
-	 * @param 	string
-	 * @param   bool
-	 * @return	array
-	 */
-	protected function _ci_prep_filename($filename, $extension, $opposite=false)
-	{
-		if ($opposite == false) {
-			return parent::_ci_prep_filename($filename, $extension);
-		}
-		
-		// opposite prep in front
-		if ( ! is_array($filename))
-		{
-			return array($extension.ucfirst(str_replace('.php', '', str_replace($extension, '', $filename))));
-		}
-		else
-		{
-			foreach ($filename as $key => $val)
-			{
-				$filename[$key] = $extension.ucfirst(str_replace('.php', '', str_replace($extension, '', $val)));
-			}
-
-			return $filename;
-		}
-	}
-	
-	/**
-	 * Utils Autoloader
+	 * Utilities Autoloader
 	 *
 	 * The config/autoload.php file contains an array that permits sub-systems,
 	 * utils to be loaded automatically.
