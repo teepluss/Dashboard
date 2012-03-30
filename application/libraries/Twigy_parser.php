@@ -18,17 +18,7 @@ class Twigy_parser {
 		/**
 		 * How to add global
 		 */	
-		self::$twig->addGlobal('any', new Any);
-		
-		/**
-		 * How to add filter to twig
-		 */		
-		/*function call($data)
-		{
-			return $name;
-		}
-		$filter = new Twig_Filter_Function('call');
-		self::$twig->addFilter('call', $filter);*/
+		self::$twig->addGlobal('any', new Twigy_tools);
 	}
 
 	public function parse($template, $data=array(), $return=false)
@@ -50,13 +40,20 @@ class Twigy_parser {
 /**
  * Any load anything from CI environment.
  */
-class Any {
+class Twigy_tools {
 
 	public function helper($what)
 	{
 		$args = func_get_args();
 		unset($args[0]);
 		return call_user_func_array($what, $args);
+	}
+	
+	public function util($what)
+	{
+		$args = func_get_args();
+		unset($args[0]);
+		return call_user_func($what, $args);
 	}
 	
 }

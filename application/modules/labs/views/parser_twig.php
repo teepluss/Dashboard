@@ -6,3 +6,5 @@
 </ul>
 
 {{any.helper('alert', rows)}}
+
+{{any.util('CIUser::getInfo', 1).getAttr('website')}}
