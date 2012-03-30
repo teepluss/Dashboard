@@ -44,6 +44,6 @@ Easy install
 7. Add Less CSS
 9. Add Coffee Script
 
-## What It's hard to do?
+## What is hard to do?
 
-1. Create user guide, manual or something like that to make everybody clear what I am doing.
+1. Create user guide, manual, document or something like that to make everybody clear what I am doing.
