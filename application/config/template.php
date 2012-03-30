@@ -59,7 +59,7 @@ $template['active_template'] = 'default';
 $template['default']['template'] = 'layouts/default';
 $template['default']['regions'] = array(
 	'title' => array(
-		'content' => array('Default Tempalte')
+		'content' => array('Default Template')
 	),
 	'header' => array(
 		'content' => array(
@@ -80,6 +80,40 @@ $template['default']['regions'] = array(
 $template['default']['parser'] = 'parser';
 $template['default']['parser_method'] = 'parse';
 $template['default']['parse_template'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
+| Mustache Template Configuration
+|--------------------------------------------------------------------------
+*/
+
+$template['customize']['template'] = 'layouts/customize';
+$template['customize']['regions'] = array(
+	'title' => array(
+		'content' => array('Customize Template using Mustache')
+	),
+	'content'
+);
+$template['customize']['parser'] = 'mustache_parser';
+$template['customize']['parser_method'] = 'parse';
+$template['customize']['parse_template'] = TRUE;
+
+/*
+|--------------------------------------------------------------------------
+| Twig Template Configuration
+|--------------------------------------------------------------------------
+*/
+
+$template['twig']['template'] = 'layouts/twig';
+$template['twig']['regions'] = array(
+	'title' => array(
+		'content' => array('Customize Template using Mustache')
+	),
+	'content'
+);
+$template['twig']['parser'] = 'twigy_parser';
+$template['twig']['parser_method'] = 'parse';
+$template['twig']['parse_template'] = TRUE;
 
 /* End of file template.php */
 /* Location: ./system/application/config/template.php */

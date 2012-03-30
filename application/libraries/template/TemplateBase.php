@@ -282,6 +282,7 @@ class TemplateBase {
    function set_parser($parser, $method = NULL)
    {
       $this->parser = $parser;
+
       $this->CI->load->library($parser);
       
       if ($method)

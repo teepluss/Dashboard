@@ -49,36 +49,6 @@ class MY_Loader extends MX_Loader {
 	}
 	
 	/**
-	 * Override load view 
-	 *
-	 * add sub view for modules
-	 *
-	 * @param 	array
-	 * @return 	void
-	 */
-	public function view($view, $vars = array(), $return = FALSE) 
-	{	
-		$_view_path = "views/";		
-		
-		// modified sub-view to modules
-		$paths = preg_split('|/|', $view);
-		if (count($paths) > 1)
-		{
-			$paths = array_slice($paths, 0, -1); 
-			$_view_path .= implode('/', $paths).'/';
-		}
-		
-		// the under is original code from MX
-		list($path, $_view) = Modules::find($view, $this->_module, $_view_path);
-		if ($path != FALSE) 
-		{
-			$this->_ci_view_paths = array($path => TRUE) + $this->_ci_view_paths;
-			$view = $_view;
-		}		
-		return $this->_ci_load(array('_ci_view' => $view, '_ci_vars' => $this->_ci_object_to_array($vars), '_ci_return' => $return));
-	}
-	
-	/**
 	 * Load Util
 	 *
 	 * This function loads the specified util file.
