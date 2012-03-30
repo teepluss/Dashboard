@@ -16,5 +16,5 @@ Easy install
 3. Add load utilities (utils)
 4. Add Util::DB using Zend_Db
 5. Add REST_Controller to build RESTful Service
-6. Add Twig template parser <http://twig.sensiolabs.org>
-7. Add Mustache template parser <http://mustache.github.com>
+6. Add [Twig](http://twig.sensiolabs.org) template parser
+7. Add [Mustache](http://mustache.github.com) template parser
