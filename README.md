@@ -18,7 +18,8 @@ Easy install
 5. Add REST_Controller to build RESTful Service
 6. Add [Twig](http://twig.sensiolabs.org) template parser
 7. Add [Mustache](http://mustache.github.com) template parser
-8. Support Master/Slave database
+8. Add Master Template Concept using [Template Library](http://williamsconcepts.com/ci/codeigniter/libraries/template/reference.html)
+9. Support Master/Slave database
 
 ## What is in the plan? 
 
