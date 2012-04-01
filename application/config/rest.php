@@ -127,7 +127,7 @@ $config['rest_ip_whitelist'] = '';
 |	'default'
 |
 */
-$config['rest_database_group'] = 'default';
+$config['rest_database_group'] = 'master';
 
 /*
 |--------------------------------------------------------------------------
@@ -139,7 +139,7 @@ $config['rest_database_group'] = 'default';
 |	'keys'
 |
 */
-$config['rest_keys_table'] = 'keys';
+$config['rest_keys_table'] = 'api_keys';
 
 /*
 |--------------------------------------------------------------------------
@@ -174,7 +174,7 @@ $config['rest_enable_keys'] = FALSE;
 |	Max: 40
 |
 */
-$config['rest_key_length'] = 40;
+$config['rest_key_length'] = 32;
 
 /*
 |--------------------------------------------------------------------------
@@ -198,7 +198,7 @@ $config['rest_key_name'] = 'X-API-KEY';
 |	'logs'
 |
 */
-$config['rest_logs_table'] = 'logs';
+$config['rest_logs_table'] = 'api_logs';
 
 /*
 |--------------------------------------------------------------------------
@@ -236,7 +236,7 @@ $config['rest_enable_logging'] = FALSE;
 |	'logs'
 |
 */
-$config['rest_limits_table'] = 'limits';
+$config['rest_limits_table'] = 'api_rate_limits';
 
 /*
 |--------------------------------------------------------------------------

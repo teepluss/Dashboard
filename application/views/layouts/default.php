@@ -7,10 +7,10 @@
 		<?php echo $_styles; ?>
 	</head>
 	<body>
-		<header><?php echo $header; ?></header>
+		<!-- <header><?php echo $header; ?></header> -->
 		<div id="container">
 			<?php echo $content; ?>
 		</div>
-		<footer><?php echo $footer; ?></footer>
+		<!-- <footer><?php echo $footer; ?></footer> -->
 	</body>
 </html>

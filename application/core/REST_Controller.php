@@ -6,11 +6,6 @@
  * @see https://github.com/philsturgeon/codeigniter-restserver
  *
  */
- 
-/**
- * @require MX_Controller to extending
- */
-require_once(APPPATH.'third_party/MX/Controller.php');
 
 class REST_Controller extends MX_Controller {
 

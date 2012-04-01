@@ -16,10 +16,12 @@
 */
 class Example_rest extends REST_Controller {
 
+	protected $methods = array(
+		'action_get' => array('level' => 1, 'limit' => 100)
+	);
+
 	public function action_get()
     {
-        // $user = $this->some_model->getSomething( $this->get('id') );
-
     	$users = array(
 			1 => array('id' => 1, 'name' => 'Some Guy', 'email' => 'example1@example.com', 'fact' => 'Loves swimming'),
 			2 => array('id' => 2, 'name' => 'Person Face', 'email' => 'example2@example.com', 'fact' => 'Has a huge face'),
@@ -33,11 +35,11 @@ class Example_rest extends REST_Controller {
         	//$this->response(NULL, 400);
         	$this->response($users, 400);
         }
-		
-    	$user = @$users[$this->get('id')];
     	
-        if($user)
+    	$id = (int)$this->get('id');
+        if (array_key_exists($id, $users))
         {
+        	$user = $users[$id];
             $this->response($user, 200); // 200 being the HTTP response code
         }
 
@@ -74,6 +76,10 @@ class Example_rest extends REST_Controller {
 
 	public function action_put()
 	{
-		var_dump($this->put('foo'));
+		$message = array(
+        	'id' => $this->get('id'), 
+        	'message' => 'UPDATED!'
+        );        
+        $this->response($message, 200);
 	}
 }
