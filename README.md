@@ -11,15 +11,16 @@ Easy install
 
 ## What I've done
 
-1. Integrate [Modular Extension HMVC](http://codeigniter.com/wiki/Modular_Extensions_-_HMVC)
-2. Integrate Zend Framework
-3. Add load utilities (utils)
-4. Add Util::DB using Zend_Db
-5. Add REST_Controller to build RESTful Service
-6. Add [Twig](http://twig.sensiolabs.org) template parser
-7. Add [Mustache](http://mustache.github.com) template parser
-8. Add Master Template Concept using [Template Library](http://williamsconcepts.com/ci/codeigniter/libraries/template/reference.html)
-9. Support Master/Slave database
+* Integrate [Modular Extension HMVC](http://codeigniter.com/wiki/Modular_Extensions_-_HMVC)
+* Integrate Zend Framework
+* Add load utilities (utils)
+* Add Util::DB using Zend_Db
+* Add REST_Controller to build RESTful Service
+* Add [Twig](http://twig.sensiolabs.org) template parser
+* Add [Mustache](http://mustache.github.com) template parser
+* Add Master Template Concept using [Template Library](http://williamsconcepts.com/ci/codeigniter/libraries/template/reference.html)
+* Add i18n for multi language site
+* Support Master/Slave database
 
 ## What is in the plan? 
 

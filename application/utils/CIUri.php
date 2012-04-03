@@ -1,6 +1,6 @@
 <?php
 
-class CIUrl {
+class CIUri {
 
 	public static $CI;
 

@@ -7,10 +7,14 @@ class Util extends MY_Controller {
 		parent::__construct();
 	}
 	
+	public function index()
+	{
+	}
+	
 	public function url()
 	{
-		$this->load->util(array('CIUrl'));
-		echo CIUrl::base('name');
+		$this->load->util(array('CIUri'));
+		echo CIUri::base('name');
 	}
 	
 	public function test()
