@@ -24,16 +24,15 @@ Easy install
 
 ## What is in the plan? 
 
-1. Change CI Language to be Zend Translate
-2. Add Authenticate using Zend Auth
-3. Add Access Control List using Zend ACL
-4. Add Zend Date to control date display
-5. Add [Twitter Bootstap](http://twitter.github.com/bootstrap/) to build Core GUI
-6. Add Zend Cache to increase performance
-6. Hack CI Router to make multiple sub-domain, sub-path, domain for users
-7. GUI to control language translate
-8. GUI to control roles and privileges
-9. GUI to control user
+* Add Authenticate using Zend Auth
+* Add Access Control List using Zend ACL
+* Add Zend Date to control date display
+* Add [Twitter Bootstap](http://twitter.github.com/bootstrap/) to build Core GUI
+* Add Zend Cache to increase performance
+* Hack CI Router to make multiple sub-domain, sub-path, domain for users
+* GUI to control language translate
+* GUI to control roles and privileges
+* GUI to control user
 
 ## What I will not promise?
 
