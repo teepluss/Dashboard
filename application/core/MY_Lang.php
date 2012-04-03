@@ -107,7 +107,6 @@ class MY_Lang extends MX_Lang {
      {
          if ((!empty($this->uri)) && (array_key_exists($lang, $this->languages)))
          {
-
 			if ($uri_segment = $this->get_uri_lang($this->uri))
 			{
 				$uri_segment['parts'][0] = $lang;
