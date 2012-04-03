@@ -19,7 +19,7 @@ Easy install
 * Add [Twig](http://twig.sensiolabs.org) template parser
 * Add [Mustache](http://mustache.github.com) template parser
 * Add Master Template Concept using [Template Library](http://williamsconcepts.com/ci/codeigniter/libraries/template/reference.html)
-* Add i18n for multi language site
+* Add i18n for multi language site support
 * Support Master/Slave database
 
 ## What is in the plan? 

@@ -145,6 +145,7 @@ class MY_Lang extends MX_Lang {
 	{
 		if (strcasecmp($this->default_lang, 'AUTO') == 0)
 		{
+			// not implement yet!!
 			// do the logic to find localize
 			$lang = 'en';
 		}
