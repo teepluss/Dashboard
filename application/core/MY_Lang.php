@@ -20,10 +20,7 @@ class MY_Lang extends MX_Lang {
     private $uri;
     private $default_uri;
     private $lang_code;
-   
-    /**************************************************/
-    
-    
+
     function __construct()
     {
         parent::__construct();
