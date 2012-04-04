@@ -64,7 +64,7 @@ class MY_Lang extends MX_Lang {
 			$uri = ($uri[0] != '/') ? '/'.$uri : $uri;
 			$new_url = $CFG->config['base_url'].$this->default_lang().$uri;
 			
-			header("Location: " . $new_url, TRUE, 302);
+			header('Location:'.$new_url, TRUE, 302);
 			exit;
 		}
     }
@@ -85,8 +85,7 @@ class MY_Lang extends MX_Lang {
         }
         
         return NULL;    // this should not happen
-    }
-    
+    }    
     
     function is_special($lang_code)
     {
@@ -164,8 +163,7 @@ class MY_Lang extends MX_Lang {
 		{
 			$uri_segment = $this->get_uri_lang($uri);
 			if (!$uri_segment['lang'])
-			{
-		
+			{		
 				if ((!$this->is_special($uri_segment['parts'][0])) && (!preg_match('/(.+)\.[a-zA-Z0-9]{2,4}$/', $uri)))
 				{
 					$uri = $this->lang() . '/' . $uri;
