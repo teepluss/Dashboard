@@ -28,11 +28,10 @@ $config['languages'] = array(
 
 /*
 |--------------------------------------------------------------------------
-| Ignore Some Paths to Exclude Redirection
+| Disallow some path to add language segment
 |--------------------------------------------------------------------------
 |
-| When $config['auto_accept'] set to TRUE
-| but some urls you don't need to redirect, you can add the path to except 
+| You can ignore some urls to auto add language segment
 | this setting can use regular expression  
 |
 */
