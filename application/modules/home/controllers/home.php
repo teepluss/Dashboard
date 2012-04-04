@@ -9,8 +9,6 @@ class Home extends MY_Controller {
 	
 	public function index()
 	{
-		//echo "Home:Index";
-		
 		/** Call another controller **/
 		echo modules::run('welcome/welcome/index');
 	}

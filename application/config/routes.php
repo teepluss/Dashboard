@@ -42,5 +42,17 @@ $route['default_controller'] = "home";
 $route['404_override'] = '';
 
 
+/*
+|--------------------------------------------------------------------------
+| Rewrite the language segment
+|--------------------------------------------------------------------------
+|
+| These routes set to bypass the language segment 
+|
+*/
+$route['^(en|th)/(.*)'] = '$2';
+$route['^(en|th)'] = $route['default_controller'];
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
