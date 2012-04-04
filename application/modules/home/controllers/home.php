@@ -15,10 +15,4 @@ class Home extends MY_Controller {
 		echo modules::run('welcome/welcome/index');
 	}
 	
-	public function test()
-	{	
-		//$this->load->util('user');
-		echo CIUser::getInfo(1)->getAttr('website');
-	}
-	
 }
