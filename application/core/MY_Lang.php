@@ -11,6 +11,11 @@ class MY_Lang extends MX_Lang {
 				'en' => 'english',
 				'th' => 'thai'
 			);
+			
+	/**
+	 * Default language
+	 */
+	private $_language = 'english';
 	
 	/**
 	 * Auto redirect to add language segment
@@ -22,12 +27,7 @@ class MY_Lang extends MX_Lang {
 	 */	
 	private $_ignore_urls = array(
 		'^admin'
-	);
-	
-	/**
-	 * Default language
-	 */
-	private $_language = 'english';
+	);	
 
 	public function __construct()
 	{
@@ -42,7 +42,7 @@ class MY_Lang extends MX_Lang {
 		
 		// get language config 
 		require(APPPATH.'config/language.php');
-		if (isset($config) && is_array($config)) {
+		if (isset($config) and is_array($config)) {
 			$this->initialize($config);
 		}
 		
@@ -61,7 +61,7 @@ class MY_Lang extends MX_Lang {
 			if ($this->_auto_accept == true) 
 			{		
 				$current_uri = $URI->uri_string();
-				if (!$this->is_ignores($current_uri) && trim($current_uri, '/') != '') {
+				if (!$this->is_ignores($current_uri) and trim($current_uri, '/') != '') {
 					$local = $this->localized($current_uri);
 					
 					$direct = $CFG->config['base_url'].$local;
@@ -119,6 +119,10 @@ class MY_Lang extends MX_Lang {
 	 */
 	public function is_ignores($path)
 	{
+		if (is_string($this->_ignore_urls) and $this->_ignore_urls == '*') {
+			return true;
+		}
+		
 		if (count($this->_ignore_urls) > 0) foreach ($this->_ignore_urls as $regexp) 
 		{
 			if (preg_match('|'.$regexp.'|i', $path)) {
@@ -145,7 +149,7 @@ class MY_Lang extends MX_Lang {
 			if ($exploded[0] != '') {
 				$first_segment = $exploded[0];
 			}
-			elseif (isset($exploded[1]) && $exploded[1] != '') {
+			elseif (isset($exploded[1]) and $exploded[1] != '') {
 				$first_segment = $exploded[1];
 			}
 		}
@@ -169,7 +173,7 @@ class MY_Lang extends MX_Lang {
 	 */
 	public function localized($uri)
 	{
-		if ($this->has_language($uri) || $this->is_ignores($uri) || preg_match('/(.+)\.[a-zA-Z0-9]{2,4}$/', $uri)) {
+		if ($this->has_language($uri) or $this->is_ignores($uri) or preg_match('/(.+)\.[a-zA-Z0-9]{2,4}$/', $uri)) {
 			return $uri;
 		}		
 		return $this->lang().'/'.trim($uri, '/');		
@@ -211,7 +215,7 @@ class MY_Lang extends MX_Lang {
 	 */
 	public function line($line='')
 	{
-		$value = ($line == '' || !isset($this->language[$line])) ? false : $this->language[$line];
+		$value = ($line == '' or !isset($this->language[$line])) ? false : $this->language[$line];
 
 		// Because killer robots like unicorns!
 		if ($value === FALSE)

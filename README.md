@@ -1,3 +1,5 @@
+Subscribe me on "[jQueryTips Fanpage](https://www.facebook.com/jQueryTips)"
+
 # "Dashboard" A CodeIgniter Modified by Tee++; v1.0b
 
 A Framework CodeIgniter Modified integrate everything you need to develop website or RESTful web service.

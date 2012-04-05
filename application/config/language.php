@@ -2,17 +2,6 @@
 
 /*
 |--------------------------------------------------------------------------
-| Enable/Disable Auto Redirect to Accept language segment
-|--------------------------------------------------------------------------
-|
-| If you would like to use the auto redirect feature you must enable it by
-| setting this variable to TRUE (boolean).
-|
-*/
-$config['auto_accept'] = FALSE;
-
-/*
-|--------------------------------------------------------------------------
 | Available Languages on Your Site
 |--------------------------------------------------------------------------
 |
@@ -28,19 +17,6 @@ $config['languages'] = array(
 
 /*
 |--------------------------------------------------------------------------
-| Disallow some path to add language segment
-|--------------------------------------------------------------------------
-|
-| You can ignore some urls to auto add language segment
-| this setting can use regular expression  
-|
-*/
-$config['ignore_urls'] = array(
-	'^api/2.0'	
-);
-
-/*
-|--------------------------------------------------------------------------
 | Language Default
 |--------------------------------------------------------------------------
 |
@@ -48,4 +24,29 @@ $config['ignore_urls'] = array(
 | but this allow you to override by remove the comment
 |
 */ 
-//$config['language'] = 'english';
+//$config['language'] = 'thai';
+
+/*
+|--------------------------------------------------------------------------
+| Enable/Disable Auto Redirect to Accept language segment
+|--------------------------------------------------------------------------
+|
+| If you would like to use the auto redirect feature you must enable it by
+| setting this variable to TRUE (boolean).
+|
+*/
+$config['auto_accept'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
+| Disallow some path to add language segment
+|--------------------------------------------------------------------------
+|
+| You can ignore some urls to auto add language segment
+| this setting can use regular expression 
+| using '*' instead of array to ignore all
+|
+*/
+$config['ignore_urls'] = array(
+	'^api/2.0'
+);
