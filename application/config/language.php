@@ -24,7 +24,7 @@ $config['languages'] = array(
 | but this allow you to override by remove the comment
 |
 */ 
-//$config['language'] = 'thai';
+$config['language'] = 'thai';
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +35,7 @@ $config['languages'] = array(
 | setting this variable to TRUE (boolean).
 |
 */
-$config['auto_accept'] = FALSE;
+$config['auto_accept'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------

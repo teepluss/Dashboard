@@ -73,7 +73,6 @@ class Example_rest extends REST_Controller {
         $this->response($message, 200); // 200 being the HTTP response code
     }
 
-
 	public function action_put()
 	{
 		$message = array(
