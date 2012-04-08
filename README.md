@@ -11,6 +11,11 @@ Easy install
 1. PHP 5.2+
 2. [Zend Framework](http://framework.zend.com/download/current/) Installed
 
+## Installation
+* Extract all code into the directory you want
+* Config the database connection in /application/config/database.php
+* Import database from the file you will found at /resources/sql/
+
 ## What I've done
 
 * Integrate [Modular Extension HMVC](http://codeigniter.com/wiki/Modular_Extensions_-_HMVC)
@@ -22,12 +27,12 @@ Easy install
 * Add [Mustache](http://mustache.github.com) template parser
 * Add Master Template Concept using [Template Library](http://williamsconcepts.com/ci/codeigniter/libraries/template/reference.html)
 * Add i18n for multi language site support
+* Add Access Control List using Zend ACL
 * Support Master/Slave database
 
 ## What is in the plan? 
 
 * Add Authenticate using Zend Auth
-* Add Access Control List using Zend ACL
 * Add Zend Date to control date display
 * Add [Twitter Bootstap](http://twitter.github.com/bootstrap/) to build Core GUI
 * Add Zend Cache to increase performance

@@ -3,5 +3,10 @@
 require APPPATH.'third_party/MX/Router.php';
 
 class MY_Router extends MX_Router {
-
+	
+	public function get_module()
+	{
+		return $this->module;
+	}
+	
 }
