@@ -1,12 +1,21 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once('Zend/Acl.php');
+class MY_Controller extends MX_Controller {
+	
+	/**
+	 * ACL variable
+	 */
+	public $acl;
 
-abstract class MY_Controller extends MX_Controller {
-	
-	public static $acl;
-	
+	/**
+	 * Controller segment
+	 */
 	private $_controller;
+	
+	
+	/**
+	 * Action segment
+	 */
 	private $_action;
 
 	public function __construct() 
@@ -15,37 +24,33 @@ abstract class MY_Controller extends MX_Controller {
 		
 		// get the check list from real uri
 		$this->_controller = CI::$APP->router->class;
-		if (CI::$APP->router->get_module()) {
-			$this->_controller = CI::$APP->router->get_module().':'.CI::$APP->router->class;
+		if ($module = CI::$APP->router->get_module()) {
+			$this->_controller = $module.':'.CI::$APP->router->class;
 		}
 		$this->_action = CI::$APP->router->method;
 		
 		// instance Zend_Acl
-		self::$acl = new Zend_Acl();
+		$this->load->library('access_control');
+		$this->acl = $this->access_control;
 		
 		// add roles
 		$this->load->model('roles/model_roles', 'roles');
 		$roles = $this->roles->getRoles();
 		foreach ($roles as $role) 
 		{
-			if ($role['inherit'] != null) {
-				self::$acl->addRole($role['id'], $role['inherit']);
-			} 
-			else {
-				self::$acl->addRole($role['id']);
-			}			
+			$this->acl->addRole($role['id'], $role['inherit']);
 		}		
 		
 		 // add resources
-		$this->load->model('resources/model_resources', 'resources');
+		$this->load->model('roles/model_resources', 'resources');
 		$resources = $this->resources->getResources();
 		foreach ($resources as $resource) 
 		{
-			self::$acl->addResource($resource['controller']);
+			$this->acl->addResource($resource['controller']);
 		}
 		
 		// add relation between roles and resources
-		$this->load->model('roles_resources/model_roles_resources', 'roles_resources');
+		$this->load->model('roles/model_roles_resources', 'roles_resources');
 		$roles_resources = $this->roles_resources->getRolesResources();
 		foreach ($roles_resources as $role_id => $resources)
 		{
@@ -61,21 +66,22 @@ abstract class MY_Controller extends MX_Controller {
 				{
 					// allow or deny all site, this should give to admin
 					case ($controller == '#all' and $action == '#all') :
-						self::$acl->$allowType($role_id);
+						$this->acl->permission($allowType, $role_id);
 						break;
 					// allow or deny all methods in controller specific
 					case ($controller != '#all' and $action == '#all') :
-						self::$acl->$allowType($role_id, $controller);
+						$this->acl->permission($allowType, $role_id, $controller);
 						break;
 					// allow or deny case by case
 					default :
-						self::$acl->$allowType($role_id, $controller, $action);
+						$this->acl->permission($allowType, $role_id, $controller, $action);
 						break;
 				}				
 			}
 		}		
 		
-		if (!self::$acl->isAllowed('Administrator', $this->_controller, $this->_action)) {
+		if (!$this->acl->isAllowed('Administrator', $this->_controller, $this->_action)) {
+			//echo 'Sorry, you don\'t have permission to access this page!';
 			// do something, such as force to login page
 		}
 	}

@@ -10,7 +10,7 @@ class Lang extends MY_Controller {
 	}
 	
 	public function index()
-	{
+	{	
 		$this->lang->load('app');
 		echo '<p>'.$this->lang->line('This is someone talk to you').'</p>';
 		echo '<p>'.$this->lang->line('test').'</p>';
