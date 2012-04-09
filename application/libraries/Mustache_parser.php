@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @see Mustache
+ */
 require_once('Mustache/Mustache.php');
 
 /**

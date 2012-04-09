@@ -10,8 +10,7 @@ class MY_Controller extends MX_Controller {
 	/**
 	 * Controller segment
 	 */
-	private $_controller;
-	
+	private $_controller;	
 	
 	/**
 	 * Action segment
@@ -78,11 +77,20 @@ class MY_Controller extends MX_Controller {
 						break;
 				}				
 			}
-		}		
+		}
 		
-		if (!$this->acl->isAllowed('Administrator', $this->_controller, $this->_action)) {
-			//echo 'Sorry, you don\'t have permission to access this page!';
-			// do something, such as force to login page
+		// current role
+		$user_role_id = 'God'; 
+		
+		if (!$this->acl->isAllowed($user_role_id, $this->_controller, $this->_action)) {
+			// the error report on development environment only
+			if (is_environment('development')) {
+				$exception_msg = 'The role '.$user_role_id.' has no permission to access '. $this->_controller.'('.$this->_action.')';
+				throw new Exception($exception_msg);
+			}
+			
+			// do something, such as redirect to login page like that!
+			// code here			
 		}
 	}
 	
