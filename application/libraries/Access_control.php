@@ -20,7 +20,7 @@ class Access_control {
 	/**
 	 * Allow if resources is not exists
 	 */
-	public $allowOnControllerNotExists = false;
+	public $allowOnControllerNotExists = true;
 	
 	/**
 	 * Construct
@@ -160,7 +160,7 @@ class Access_control {
 		if (!self::$acl->has($controller)) {
 			$this->addResource($controller);
 		}
-		
+				
 		self::$acl->$type($role, $controller, $action);
 	}
 	

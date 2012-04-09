@@ -85,8 +85,7 @@ class MY_Controller extends MX_Controller {
 		if (!$this->acl->isAllowed($user_role_id, $this->_controller, $this->_action)) {
 			// the error report on development environment only
 			if (is_environment('development')) {
-				$exception_msg = 'The role '.$user_role_id.' has no permission to access '. $this->_controller.'('.$this->_action.')';
-				throw new Exception($exception_msg);
+				die('Sorry!, The role '.$user_role_id.' has no permission to access '. $this->_controller.' ('.$this->_action.')');
 			}
 			
 			// do something, such as redirect to login page like that!
