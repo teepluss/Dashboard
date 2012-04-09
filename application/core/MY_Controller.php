@@ -89,7 +89,8 @@ class MY_Controller extends MX_Controller {
 			}
 			
 			// do something, such as redirect to login page like that!
-			// code here			
+			//header('auth/sign_in#access_denied', true, 302); 
+			//exit(0);
 		}
 	}
 	
