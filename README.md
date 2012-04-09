@@ -14,7 +14,7 @@ Easy install
 ## Installation
 * Extract all code into the directory you want
 * Config the database connection in /application/config/database.php
-* Import database from the .sql file you'll found at /install/sql/[name].sql
+* Import database from the .sql file you'll found at /backup/sql/[name].sql
 
 ## What I've done
 
