@@ -11,7 +11,7 @@
  Target Server Version : 50509
  File Encoding         : utf-8
 
- Date: 04/09/2012 21:57:17 PM
+ Date: 04/10/2012 17:07:26 PM
 */
 
 SET NAMES utf8;
@@ -95,13 +95,13 @@ CREATE TABLE `resources` (
   `active` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `controller_action` (`controller`,`action`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `resources`
 -- ----------------------------
 BEGIN;
-INSERT INTO `resources` VALUES ('1', 'labs:lang', 'index', null, 'Labs', null, 'access', '1'), ('2', 'test:something', 'delete', null, 'Test', null, 'access', '1'), ('3', '#all', '#all', null, 'Admin', null, 'access', '1'), ('4', 'test:something', '#all', null, 'Test', null, 'access', '1'), ('5', 'home:home', 'index', null, 'Home', null, 'access', '1');
+INSERT INTO `resources` VALUES ('1', 'labs:lang', 'index', null, 'Labs', null, 'access', '1'), ('2', 'test:something', 'delete', null, 'Test', null, 'access', '1'), ('3', '#all', '#all', null, 'Admin', null, 'access', '1'), ('4', 'test:something', '#all', null, 'Test', null, 'access', '1'), ('5', 'home:home', 'index', null, 'Home', null, 'access', '1'), ('6', 'labs:labs', 'index', null, 'Labs', null, 'access', '1');
 COMMIT;
 
 -- ----------------------------
@@ -116,6 +116,8 @@ CREATE TABLE `roles` (
   `order` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `modified_at` datetime NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `flags` enum('normal','deleted') NOT NULL,
   PRIMARY KEY (`id`),
   KEY `inherit` (`inherit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -124,7 +126,7 @@ CREATE TABLE `roles` (
 --  Records of `roles`
 -- ----------------------------
 BEGIN;
-INSERT INTO `roles` VALUES ('Admin', 'Moderator', 'Admin', 'User who add something to our site', '7', '2012-04-09 21:41:45', '2012-04-09 21:41:47'), ('Editor', 'Publisher', 'Editor', 'User who review our site', '4', '2012-04-08 17:45:55', '2012-04-08 17:45:57'), ('God', 'Admin', 'God', 'User who create our site', '8', '2012-04-09 21:41:50', '2012-04-09 21:41:52'), ('Guest', null, 'Guest', 'Low level of user ', '1', '2012-04-08 17:44:20', '2012-04-08 17:44:23'), ('Moderator', 'Tester', 'Moderator', 'User who control our site', '6', '2012-04-09 21:41:39', '2012-04-09 21:41:42'), ('Publisher', 'User', 'Publisher', 'User who become a merchant', '3', '2012-04-08 17:45:13', '2012-04-08 17:45:17'), ('Tester', 'Editor', 'Tester', 'User who test flow our site', '5', '2012-04-08 17:45:33', '2012-04-08 17:45:35'), ('User', 'Guest', 'User', 'User who registered', '2', '2012-04-08 17:44:35', '2012-04-08 17:44:38');
+INSERT INTO `roles` VALUES ('Admin', 'Moderator', 'Admin', 'User who add something to our site', '7', '2012-04-09 21:41:45', '2012-04-09 21:41:47', '1', 'normal'), ('Editor', 'Publisher', 'Editor', 'User who review our site', '4', '2012-04-08 17:45:55', '2012-04-08 17:45:57', '1', 'normal'), ('God', 'Admin', 'God', 'User who create our site', '8', '2012-04-09 21:41:50', '2012-04-09 21:41:52', '1', 'normal'), ('Guest', null, 'Guest', 'Low level of user ', '1', '2012-04-08 17:44:20', '2012-04-08 17:44:23', '1', 'normal'), ('Moderator', 'Tester', 'Moderator', 'User who control our site', '6', '2012-04-09 21:41:39', '2012-04-09 21:41:42', '1', 'normal'), ('Publisher', 'User', 'Publisher', 'User who become a merchant', '3', '2012-04-08 17:45:13', '2012-04-08 17:45:17', '1', 'normal'), ('Tester', 'Editor', 'Tester', 'User who test flow our site', '5', '2012-04-08 17:45:33', '2012-04-08 17:45:35', '1', 'normal'), ('User', 'Guest', 'User', 'User who registered', '2', '2012-04-08 17:44:35', '2012-04-08 17:44:38', '1', 'normal');
 COMMIT;
 
 -- ----------------------------
@@ -161,6 +163,7 @@ CREATE TABLE `users` (
   `created_at` datetime NOT NULL,
   `modified_at` datetime NOT NULL,
   `active` tinyint(4) NOT NULL DEFAULT '0',
+  `flags` enum('normal','deleted') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `role_id` (`role_id`),
@@ -172,7 +175,7 @@ CREATE TABLE `users` (
 --  Records of `users`
 -- ----------------------------
 BEGIN;
-INSERT INTO `users` VALUES ('1', 'User', 'teepluss@gmail.com', 'xxxxx', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `users` VALUES ('1', 'User', 'teepluss@gmail.com', 'xxxxx', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
