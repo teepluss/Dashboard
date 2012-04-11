@@ -17,6 +17,7 @@ class CIUri {
 	
 	public static function assets($uri='')
 	{
+		return site_url('assets/'.$uri);
 	}
 	
 }

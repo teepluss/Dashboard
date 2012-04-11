@@ -9,7 +9,7 @@
 | "default" group).
 |
 */
-$template['active_template'] = 'default';
+$template['active_template'] = 'basic';
 
 /*
 |--------------------------------------------------------------------------
@@ -52,68 +52,51 @@ $template['active_template'] = 'default';
 
 /*
 |--------------------------------------------------------------------------
-| Default Template Configuration (adjust this or create your own)
+| Basic Template Configuration (adjust this or create your own)
 |--------------------------------------------------------------------------
 */
 
-$template['default']['template'] = 'layouts/default';
-$template['default']['regions'] = array(
+$template['basic']['template'] = 'layouts/basic';
+$template['basic']['regions'] = array(
 	'title' => array(
-		'content' => array('Default Template')
+		'content' => array('Basic Template')
 	),
 	'header' => array(
-		'content' => array(
-			'<a href="#header">',
-			'Header',
-			'</a>'
-		)
+		'url' => 'header'
 	),
 	'content',
 	'footer' => array(
-		'content' => array(
-			'<a href="#footer">',
-			'Footer',
-			'</a>'
-		)
+		'url' => 'footer'
 	)
 );
-$template['default']['parser'] = 'parser';
-$template['default']['parser_method'] = 'parse';
-$template['default']['parse_template'] = FALSE;
+$template['basic']['parser'] = 'parser';
+$template['basic']['parser_method'] = 'parse';
+$template['basic']['parse_template'] = FALSE;
+
 
 /*
 |--------------------------------------------------------------------------
-| Mustache Template Configuration
+| Fluid Template Configuration (adjust this or create your own)
 |--------------------------------------------------------------------------
 */
 
-$template['customize']['template'] = 'layouts/customize';
-$template['customize']['regions'] = array(
+$template['fluid']['template'] = 'layouts/fluid';
+$template['fluid']['regions'] = array(
 	'title' => array(
-		'content' => array('Customize Template using Mustache')
+		'content' => array('Fluid Template')
 	),
-	'content'
-);
-$template['customize']['parser'] = 'mustache_parser';
-$template['customize']['parser_method'] = 'parse';
-$template['customize']['parse_template'] = TRUE;
-
-/*
-|--------------------------------------------------------------------------
-| Twig Template Configuration
-|--------------------------------------------------------------------------
-*/
-
-$template['twig']['template'] = 'layouts/twig';
-$template['twig']['regions'] = array(
-	'title' => array(
-		'content' => array('Customize Template using Mustache')
+	'header' => array(
+		'url' => 'header'
 	),
-	'content'
+	'content',
+	'footer' => array(
+		'url' => 'footer'
+	)
 );
-$template['twig']['parser'] = 'twigy_parser';
-$template['twig']['parser_method'] = 'parse';
-$template['twig']['parse_template'] = TRUE;
+$template['fluid']['parser'] = 'parser';
+$template['fluid']['parser_method'] = 'parse';
+$template['fluid']['parse_template'] = FALSE;
+
 
 /* End of file template.php */
 /* Location: ./system/application/config/template.php */

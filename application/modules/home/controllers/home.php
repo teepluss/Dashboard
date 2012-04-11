@@ -9,8 +9,9 @@ class Home extends MY_Controller {
 	
 	public function index()
 	{
-		/** Call another controller **/
-		echo modules::run('welcome/welcome/index');
+		$this->template->set_template('basic');
+		$this->template->write_view('content', 'home-index');
+		$this->template->render();
 	}
 	
 }
