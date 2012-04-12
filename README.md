@@ -13,6 +13,7 @@ Easy install
 
 ## Installation
 * Extract all code into the directory you want
+* Config your domain at /application/config/config.php 
 * Config the database connection in /application/config/database.php
 * Import database from the .sql file you'll found at /backup/sql/[name].sql
 
@@ -28,13 +29,13 @@ Easy install
 * Add Master Template Concept using [Template Library](http://williamsconcepts.com/ci/codeigniter/libraries/template/reference.html)
 * Add i18n for multi language site support
 * Add Access Control List using Zend ACL
+* Add [Twitter Bootstap](http://twitter.github.com/bootstrap/) to build Core GUI
 * Support Master/Slave database
 
 ## What is in the plan? 
 
 * Add Authenticate using Zend Auth
 * Add Zend Date to control date display
-* Add [Twitter Bootstap](http://twitter.github.com/bootstrap/) to build Core GUI
 * Add Zend Cache to increase performance
 * Hack CI Router to make multiple sub-domain, sub-path, domain for users
 * GUI to control language translate

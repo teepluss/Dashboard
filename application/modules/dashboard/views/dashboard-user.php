@@ -28,7 +28,7 @@
 		<div class="hero-unit">
 			<h1>Hello, world!</h1>
 			<p>This is a template for User who logged in.</p>
-			<p><a href="<?php echo site_url('dashboard/publisher'); ?>" class="btn btn-primary btn-large">Go to Publisher channel &raquo;</a></p>
+			<p><a href="<?php echo CIUri::publisher(1, 'dashboard/publisher'); ?>" class="btn btn-primary btn-large">Go to Publisher channel &raquo;</a></p>
 		</div>
 		<div class="row-fluid">
 			<div class="span4">
