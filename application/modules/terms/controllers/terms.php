@@ -12,6 +12,9 @@ class Terms extends MX_Controller {
 		$this->load->model('model_terms', 'terms');
 		$view['entries'] = $this->terms->getItems();
 		// manage term with filter user_id
+		
+		//alert( CIUser::authInfo()->get() ); exit(0);
+		
 		return $this->load->view('admin-add', $view, true);
 	}
 	
