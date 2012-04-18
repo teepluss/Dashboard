@@ -13,9 +13,4 @@ class Labs extends MY_Controller {
 		$this->template->render();
 	}
 	
-	function tee($slug)
-	{
-		
-	}
-	
 }

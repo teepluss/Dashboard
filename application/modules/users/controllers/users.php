@@ -14,6 +14,8 @@ class Users extends MY_Controller {
 	
 	public function account()
 	{
+		$this->template->write_view('content', 'users-account');
+		$this->template->render();
 	}
 	
 	public function profile()

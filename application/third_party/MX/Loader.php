@@ -42,7 +42,7 @@ class MX_Loader extends CI_Loader
 	
 	/** Initialize the loader variables **/
 	public function initialize($controller = NULL) {
-
+		
 		if (is_a($controller, 'MX_Controller')) {	
 			
 			/* reference to the module controller */
@@ -74,7 +74,8 @@ class MX_Loader extends CI_Loader
 		foreach (Modules::$locations as $location => $offset) {
 			
 			/* only add a module path if it exists */
-			if (is_dir($module_path = $location.$module.'/')) {
+			if (is_dir($module_path = $location.$module.'/') && ! in_array($module_path, $this->_ci_model_paths)) 
+			{
 				array_unshift($this->_ci_model_paths, $module_path);
 			}
 		}
@@ -258,7 +259,6 @@ class MX_Loader extends CI_Loader
 		list($path, $_view) = Modules::find($view, $this->_module, 'views/');
 		
 		if ($path != FALSE) {
-
 			$this->_ci_view_paths = array($path => TRUE) + $this->_ci_view_paths;
 			$view = $_view;
 		}
@@ -329,7 +329,7 @@ class MX_Loader extends CI_Loader
 	
 	/** Autoload module items **/
 	public function _autoloader($autoload) {
-
+		
 		$path = FALSE;
 		
 		if ($this->_module) {
@@ -370,7 +370,6 @@ class MX_Loader extends CI_Loader
 		foreach (array('helper', 'plugin', 'language') as $type) {
 			if (isset($autoload[$type])){
 				foreach ($autoload[$type] as $item) {
-				
 					$this->$type($item);
 				}
 			}

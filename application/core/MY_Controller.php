@@ -96,6 +96,7 @@ class MY_Controller extends MX_Controller {
 			redirect('users/auth/sign_in#access_denied');
 			exit(0);
 		}
+
 	}
 	
 }

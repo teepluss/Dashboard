@@ -7,26 +7,29 @@ class Terms extends CI_Controller {
 		parent::__construct();
 	}
 
-	public function records($slug)
+	public function _records($slug)
 	{
 		// manage term with filter user_id
+		$this->template->write_view('content', 'admin-add');
+		$this->template->render();
 	}
 	
-	public function add($slug)
+	public function _add($slug)
 	{
 		if ($this->input->is_post()) 
 		{
 			// action
+			echo "Hey";
 		}
 		// template render
 	}
 	
-	public function edit($slug, $id)
+	public function _edit($slug, $id)
 	{
 		echo $slug;
 	}
 	
-	public function delete($slug, $id, $action=null)
+	public function _delete($slug, $id, $action=null)
 	{
 		echo $slug;
 	}
