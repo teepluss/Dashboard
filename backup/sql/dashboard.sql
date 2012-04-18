@@ -11,7 +11,7 @@
  Target Server Version : 50509
  File Encoding         : utf-8
 
- Date: 04/18/2012 11:09:02 AM
+ Date: 04/19/2012 00:45:23 AM
 */
 
 SET NAMES utf8;
@@ -135,7 +135,7 @@ CREATE TABLE `resources` (
 --  Records of `resources`
 -- ----------------------------
 BEGIN;
-INSERT INTO `resources` VALUES ('1', 'labs:lang', 'index', null, 'Labs', null, 'access', '1'), ('2', 'test:something', 'delete', null, 'Test', null, 'access', '1'), ('3', '#all', '#all', null, 'Admin', null, 'access', '1'), ('4', 'test:something', '#all', null, 'Test', null, 'access', '1'), ('5', 'home:home', 'index', null, 'Home', null, 'access', '1'), ('6', 'labs:labs', 'index', null, 'Labs', null, 'access', '1'), ('7', 'dashboard:dashboard', 'user', null, 'Dashboard', null, 'access', '1'), ('8', 'dashboard:admin', 'index', null, 'Dashboard', null, 'access', '1'), ('9', 'dashboard:dashboard', 'publisher', null, 'Dashboard', null, 'access', '1');
+INSERT INTO `resources` VALUES ('1', 'labs:lang', 'index', null, 'Labs', null, 'access', '1'), ('2', 'test:something', 'delete', null, 'Test', null, 'access', '1'), ('3', '#all', '#all', null, 'Admin', null, 'access', '1'), ('4', 'test:something', '#all', null, 'Test', null, 'access', '1'), ('5', 'home:home', 'index', null, 'Home', null, 'access', '1'), ('6', 'labs:labs', '#all', null, 'Labs', null, 'access', '1'), ('7', 'dashboard:dashboard', 'user', null, 'Dashboard', null, 'access', '1'), ('8', 'dashboard:admin', 'index', null, 'Dashboard', null, 'access', '1'), ('9', 'dashboard:dashboard', 'publisher', null, 'Dashboard', null, 'access', '1');
 COMMIT;
 
 -- ----------------------------
@@ -164,10 +164,10 @@ INSERT INTO `roles` VALUES ('Admin', 'Moderator', 'Admin', 'User who add somethi
 COMMIT;
 
 -- ----------------------------
---  Table structure for `roles_resources`
+--  Table structure for `roles_has_resources`
 -- ----------------------------
-DROP TABLE IF EXISTS `roles_resources`;
-CREATE TABLE `roles_resources` (
+DROP TABLE IF EXISTS `roles_has_resources`;
+CREATE TABLE `roles_has_resources` (
   `role_id` varchar(100) NOT NULL,
   `resource_id` bigint(30) NOT NULL,
   `allow` tinyint(1) NOT NULL,
@@ -178,26 +178,65 @@ CREATE TABLE `roles_resources` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `roles_resources`
+--  Records of `roles_has_resources`
 -- ----------------------------
 BEGIN;
-INSERT INTO `roles_resources` VALUES ('Editor', '4', '1'), ('God', '3', '1'), ('Guest', '1', '1'), ('Guest', '5', '1'), ('Guest', '7', '1'), ('User', '1', '1');
+INSERT INTO `roles_has_resources` VALUES ('Editor', '4', '1'), ('God', '3', '1'), ('Guest', '1', '1'), ('Guest', '5', '1'), ('Guest', '6', '1'), ('Guest', '7', '1'), ('User', '1', '1');
 COMMIT;
 
 -- ----------------------------
---  Table structure for `user_profile`
+--  Table structure for `terms`
 -- ----------------------------
-DROP TABLE IF EXISTS `user_profile`;
-CREATE TABLE `user_profile` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
+DROP TABLE IF EXISTS `terms`;
+CREATE TABLE `terms` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) DEFAULT NULL,
+  `vocabulary_id` int(10) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `description` text NOT NULL,
+  `weight` mediumint(5) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `modified_at` datetime NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `flags` enum('normal','deleted') NOT NULL DEFAULT 'normal',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `user_id_vocabulary_id` (`user_id`,`vocabulary_id`) USING BTREE
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `terms_hierarchies`
+-- ----------------------------
+DROP TABLE IF EXISTS `terms_hierarchies`;
+CREATE TABLE `terms_hierarchies` (
+  `user_id` int(10) NOT NULL DEFAULT '0',
+  `term_id` int(10) NOT NULL DEFAULT '0',
+  `term_parent_id` int(10) DEFAULT NULL,
+  PRIMARY KEY (`term_id`),
+  KEY `term_id` (`term_id`),
+  KEY `term_parent_id` (`term_parent_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `terms_vocabularies`
+-- ----------------------------
+DROP TABLE IF EXISTS `terms_vocabularies`;
+CREATE TABLE `terms_vocabularies` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `slug` varchar(50) NOT NULL,
+  `comment` longtext,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`slug`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Records of `terms_vocabularies`
+-- ----------------------------
+BEGIN;
+INSERT INTO `terms_vocabularies` VALUES ('1', 'Publisher Types', 'A main terms of publisher', 'publisher_types', null), ('2', 'Publisher Products Types', 'A main terms of products', 'product_types', null), ('3', 'Products Types', 'Publisher products terms', 'products', null);
+COMMIT;
 
 -- ----------------------------
 --  Table structure for `users`
@@ -228,5 +267,20 @@ CREATE TABLE `users` (
 BEGIN;
 INSERT INTO `users` VALUES ('1', 'User', 'teepluss', 'teepluss@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal');
 COMMIT;
+
+-- ----------------------------
+--  Table structure for `users_profile`
+-- ----------------------------
+DROP TABLE IF EXISTS `users_profile`;
+CREATE TABLE `users_profile` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `modified_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 SET FOREIGN_KEY_CHECKS = 1;

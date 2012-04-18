@@ -14,9 +14,14 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
         <p class="navbar-text pull-right">
+        	<?php if (CIUser::isLoggedIn()) : ?>
         	<span>Logged in as</span>
-        	<a href="<?php echo CIUri::base('dashboard/user'); ?>">Tee++</a>
+        	<a href="<?php echo CIUri::base('dashboard/user'); ?>"><?php echo CIUser::authInfo()->get('username'); ?></a>
         	<a href="<?php echo CIUri::base('dashboard/admin'); ?>"><span class="label label-info">Admin</span></a>
+        	<a class="btn btn-danger" href="<?php echo CIUri::base('users/auth/sign_out'); ?>">Sign Out</a>
+        	<?php else : ?>
+        	<a class="btn" href="<?php echo CIUri::base('users/auth/sign_in'); ?>">Sign In</a>
+        	<?php endif; ?>
         </p>
       </div><!--/.nav-collapse -->
     </div>
