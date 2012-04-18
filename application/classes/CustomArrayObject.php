@@ -14,12 +14,16 @@ class CustomArrayObject extends ArrayObject {
 	 * @param  string
 	 * @return mixed
 	 */
-	public function get($_id)
+	public function get($_id='')
 	{
-		if (parent::offsetExists($_id)){
+		if (parent::offsetExists($_id)) 
+		{
+            if (is_array($this[$_id])) {
+            	return new CustomArrayObject($this[$_id]);
+            }
             return $this[$_id];
         } 
-        return false;
+        return $this;
 	}
 	
 	/**
@@ -32,6 +36,21 @@ class CustomArrayObject extends ArrayObject {
 	public function getId()
 	{
 		return $this->get('id');
+	}
+	
+	/**
+	 * Magic method __get
+	 * 
+	 * @access public
+	 * @param  string
+	 * @return mixed
+	 */
+	public function __get($_id)
+	{
+		if (parent::offsetExists($_id)) {
+			return $this[$_id];
+		}
+		return false;
 	}
     
 }

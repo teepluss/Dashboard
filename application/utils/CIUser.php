@@ -65,8 +65,8 @@ class CIUser {
 				'username' => $account['username'],
 				'email'    => $account['email'],
 				'info'     => array(
-					'first_name' => '',
-					'last_name'  => ''
+					'first_name' => 'Pattanai',
+					'last_name'  => 'Kawinvasin'
 				)
 			);
 		}

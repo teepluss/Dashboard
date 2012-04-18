@@ -83,7 +83,6 @@ class MY_Controller extends MX_Controller {
 		$auth_role_id = CIUser::authInfo()->get('role_id');
 		$auth_role_id || $auth_role_id = $this->acl->getDefaultRole();
 
-		
 		// suppose role id God
 		$auth_role_id = 'God';
 		
