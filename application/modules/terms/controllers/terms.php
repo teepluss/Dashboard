@@ -1,5 +1,21 @@
 <?php
 
+/**
+ * Terms Controller.
+ * this controller is just abstract, 
+ * so you need to implement another controller to inherit.
+ *
+ * EXAMPLE USAGE:
+ * 
+ 	public function records()
+	{
+		$content = modules::run('terms/_records', 'products');
+		$this->template->write('content', $content);
+		$this->template->render();
+	}
+ * 
+ * @extends MX_Controller
+ */
 class Terms extends MX_Controller {
 	
 	public function __construct()
@@ -13,7 +29,7 @@ class Terms extends MX_Controller {
 		$view['entries'] = $this->terms->getItems();
 		// manage term with filter user_id
 		
-		//alert( CIUser::authInfo()->get() ); exit(0);
+		//alert( CIUser::authInfo()->get('info')->get('first_name') ); 
 		
 		return $this->load->view('admin-add', $view, true);
 	}

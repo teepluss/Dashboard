@@ -23,7 +23,7 @@ class CustomArrayObject extends ArrayObject {
             }
             return $this[$_id];
         } 
-        return $this;
+        return '';
 	}
 	
 	/**
