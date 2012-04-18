@@ -1,3 +1,3 @@
 <?php
 
-$lang['test'] = "นี่คือคำว่า 'test' ในภาษาไทย";
+$lang['Your login information is invalid.'] = 'ข้อมูลเข้าระบบผิดพลาด กรุณาทำการตรวจสอบ';

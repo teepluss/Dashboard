@@ -9,8 +9,33 @@ class CIUser {
 		self::$CI =& get_instance();
 	}
 	
+	public static function isLoggedIn($returned=false)
+	{
+		// get id from session
+		$CI =& get_instance();
+		$CI->load->model('users/model_auth', 'auth');
+		$authInfo = $CI->auth->read();
+		
+		// user is not logged in
+		if (!$authInfo) {
+			return false;
+		}
+		
+		// user session failed
+		if ($authInfo['loggedIn'] == false || !$authInfo['userId']) {
+			return false;
+		}
+		
+		// return user_id or not
+		if ($returned === true) {
+			return $authInfo['userId'];
+		}		
+		return true;
+	}
+	
 	/**
 	 * Get user info specific user ID
+	 * Formatting user info
 	 * 
 	 * @access public
 	 * @static
@@ -19,13 +44,35 @@ class CIUser {
 	 */
 	public static function userInfo($id)
 	{
-		// look up from the database
-		$suppose = array(
-			'id'        => 1,
-			'name'      => 'Pattanai',
-			'last_name' => 'Kawinvasin'
-		);
-		return $suppose;
+		$user_info = array();
+		
+		// ID not specific
+		if (is_numeric($id))
+		{		
+			// look up from the database
+			$CI =& get_instance();
+			$CI->load->model('users/model_users', 'users');
+			$CI->load->model('users/model_user_profile', 'user_profile');
+			
+			// get account & profile
+			$account = $CI->users->getItem($id);
+			$profile = $CI->user_profile->getItem($id);
+			
+			// formatting user info
+			$user_info = array(
+				'id'       => $account['id'],
+				'role_id'  => $account['role_id'],
+				'username' => $account['username'],
+				'email'    => $account['email'],
+				'info'     => array(
+					'first_name' => '',
+					'last_name'  => ''
+				)
+			);
+		}
+		
+		self::$CI->load->loadClass('CustomArrayObject');
+		return new CustomArrayObject($user_info);
 	}
 
 	/**
@@ -37,9 +84,8 @@ class CIUser {
 	 */
 	public static function authInfo()
 	{
-		// get id from session
-		$id = 1;
-		return self::userInfo($id);
+		$userId = self::isLoggedIn(true);
+		return self::userInfo($userId);
 	}
 	
 	/**

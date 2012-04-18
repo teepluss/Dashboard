@@ -3,6 +3,11 @@
 require APPPATH.'third_party/MX/Loader.php';
 
 /**
+ * Zend_Loader
+ */
+require 'Zend/Loader.php';
+
+/**
  * MY_Loader Class
  *
  * Append method to parent
@@ -160,6 +165,32 @@ class MY_Loader extends MX_Loader {
 		{
 			$this->utils($autoload['utils']);
 		}
+	}	
+	
+	/**
+	 * Load another class
+	 * 
+	 * @access public
+	 * @param  string
+	 * @return void
+	 */
+	public function loadClass($class)
+	{
+		$class = rtrim($class, '.php').'.php';
+		require_once($class);
+	}
+	
+	/**
+	 * Zend Loader 
+	 * 
+	 * @access public
+	 * @param  string
+	 * @param  string (default: null)
+	 * @return void
+	 */
+	public function loadZend($class, $dirs='')
+	{
+		Zend_Loader::loadClass($class, $dirs);
 	}
 	
 }

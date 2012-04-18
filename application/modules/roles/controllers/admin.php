@@ -9,7 +9,7 @@ class Admin extends MY_Controller {
 	
 	public function index()
 	{
-		redirect('roles/admin/role_manage');
+		redirect('roles/admin/roles_manage');
 	}
 	
 	public function roles_manage()
@@ -19,7 +19,19 @@ class Admin extends MY_Controller {
 	
 	public function roles_add()
 	{
+		$_POST['title'] = 'sss';
 		// add new role
+		$this->load->library('form_validation');
+
+		if ($this->form_validation->run('roles/admin/roles_add') == true) 
+		{
+			echo "padd";
+		}
+		else 
+		{
+			echo "Failed";
+			echo validation_errors();
+		}
 	}
 	
 	public function roles_edit($id)

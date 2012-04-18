@@ -79,18 +79,23 @@ class MY_Controller extends MX_Controller {
 			}
 		}
 		
-		// current role
-		$user_role_id = 'God'; 
+		// get current role
+		$auth_role_id = CIUser::authInfo()->get('role_id');
+		$auth_role_id || $auth_role_id = $this->acl->getDefaultRole();
+
 		
-		if (!$this->acl->isAllowed($user_role_id, $this->_controller, $this->_action)) {
+		// suppose role id God
+		$auth_role_id = 'God';
+		
+		if (!$this->acl->isAllowed($auth_role_id, $this->_controller, $this->_action)) {
 			// the error report on development environment only
 			if (is_environment('development')) {
-				die('Sorry!, The role '.$user_role_id.' has no permission to access '. $this->_controller.' ('.$this->_action.')');
+				die('Sorry!, The role '.$auth_role_id.' has no permission to access '. $this->_controller.' ('.$this->_action.')');
 			}
 			
 			// do something, such as redirect to login page like that!
-			//header('auth/sign_in#access_denied', true, 302); 
-			//exit(0);
+			redirect('users/auth/sign_in#access_denied');
+			exit(0);
 		}
 	}
 	

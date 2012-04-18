@@ -194,10 +194,10 @@ if (defined('ENVIRONMENT'))
 
 /*
  * -------------------------------------------------------------------
- *  Set include path
+ *  Set include path 
  * -------------------------------------------------------------------
  */
-	ini_set('include_path', ini_get('include_path').PATH_SEPARATOR.APPPATH.'classes');
+ini_set('include_path', ini_get('include_path').PATH_SEPARATOR.APPPATH.'classes');
 
 /*
  * --------------------------------------------------------------------

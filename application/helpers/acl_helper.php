@@ -6,9 +6,9 @@
  * Default is allow all cases
  *
  *
- * @access	 public
- * @param string (development, production, testing)
- * @return	bool
+ * @access public
+ * @param  string (development, production, testing)
+ * @return bool
  */
 function is_environment($mode='any')
 {

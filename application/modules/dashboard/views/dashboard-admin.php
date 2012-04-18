@@ -20,6 +20,8 @@
 				<li><a href="#">Link</a></li>
 				<li><a href="#">Link</a></li>
 			</ul>
+			
+			<?php //echo CIWidget::navigator('admin'); ?>
 		</div><!--/.well -->
 	</div><!--/span-->
 	<div class="span9">

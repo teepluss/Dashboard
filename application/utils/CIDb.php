@@ -19,7 +19,7 @@ class CIDb {
 	 * @access public
 	 * @static
 	 * @param  string 
-	 * @return object
+	 * @return void
 	 */
 	public static function connect($profile)
 	{
@@ -63,6 +63,23 @@ class CIDb {
 		$dbProfile = Zend_Db::factory($dbDriver, $params);
 		Zend_Registry::set('dbProfile_'.$group, $dbProfile);		
 		return $dbProfile;
+	}
+	
+	/**
+	 * Get the database profile connected
+	 * 
+	 * @access public
+	 * @static
+	 * @param  string
+	 * @return object
+	 */
+	public static function getDbProfile($group=null)
+	{
+		if (is_null($group)) {
+			$group = 'slave';
+		}
+		self::connect($group);
+		return self::$conn;
 	}
 	
 	/**

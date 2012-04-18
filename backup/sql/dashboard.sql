@@ -11,7 +11,7 @@
  Target Server Version : 50509
  File Encoding         : utf-8
 
- Date: 04/10/2012 17:07:26 PM
+ Date: 04/18/2012 11:09:02 AM
 */
 
 SET NAMES utf8;
@@ -81,6 +81,40 @@ INSERT INTO `api_rate_limits` VALUES ('1', 'api/2.0/example', '12', '1333275946'
 COMMIT;
 
 -- ----------------------------
+--  Table structure for `open_ids`
+-- ----------------------------
+DROP TABLE IF EXISTS `open_ids`;
+CREATE TABLE `open_ids` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(10) NOT NULL DEFAULT '0',
+  `service` enum('facebook') NOT NULL,
+  `uid` bigint(30) NOT NULL,
+  `access_token` longtext,
+  `created_at` datetime NOT NULL,
+  `modified_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `service_user_id` (`service`,`uid`) USING BTREE
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `publishers`
+-- ----------------------------
+DROP TABLE IF EXISTS `publishers`;
+CREATE TABLE `publishers` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` longtext NOT NULL,
+  `created_at` datetime NOT NULL,
+  `modified_at` datetime NOT NULL,
+  `active` tinyint(4) NOT NULL,
+  `flags` enum('normal','deleted') NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 --  Table structure for `resources`
 -- ----------------------------
 DROP TABLE IF EXISTS `resources`;
@@ -95,13 +129,13 @@ CREATE TABLE `resources` (
   `active` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `controller_action` (`controller`,`action`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `resources`
 -- ----------------------------
 BEGIN;
-INSERT INTO `resources` VALUES ('1', 'labs:lang', 'index', null, 'Labs', null, 'access', '1'), ('2', 'test:something', 'delete', null, 'Test', null, 'access', '1'), ('3', '#all', '#all', null, 'Admin', null, 'access', '1'), ('4', 'test:something', '#all', null, 'Test', null, 'access', '1'), ('5', 'home:home', 'index', null, 'Home', null, 'access', '1'), ('6', 'labs:labs', 'index', null, 'Labs', null, 'access', '1');
+INSERT INTO `resources` VALUES ('1', 'labs:lang', 'index', null, 'Labs', null, 'access', '1'), ('2', 'test:something', 'delete', null, 'Test', null, 'access', '1'), ('3', '#all', '#all', null, 'Admin', null, 'access', '1'), ('4', 'test:something', '#all', null, 'Test', null, 'access', '1'), ('5', 'home:home', 'index', null, 'Home', null, 'access', '1'), ('6', 'labs:labs', 'index', null, 'Labs', null, 'access', '1'), ('7', 'dashboard:dashboard', 'user', null, 'Dashboard', null, 'access', '1'), ('8', 'dashboard:admin', 'index', null, 'Dashboard', null, 'access', '1'), ('9', 'dashboard:dashboard', 'publisher', null, 'Dashboard', null, 'access', '1');
 COMMIT;
 
 -- ----------------------------
@@ -147,8 +181,23 @@ CREATE TABLE `roles_resources` (
 --  Records of `roles_resources`
 -- ----------------------------
 BEGIN;
-INSERT INTO `roles_resources` VALUES ('Editor', '4', '1'), ('God', '3', '1'), ('Guest', '1', '1'), ('Guest', '5', '1'), ('User', '1', '1');
+INSERT INTO `roles_resources` VALUES ('Editor', '4', '1'), ('God', '3', '1'), ('Guest', '1', '1'), ('Guest', '5', '1'), ('Guest', '7', '1'), ('User', '1', '1');
 COMMIT;
+
+-- ----------------------------
+--  Table structure for `user_profile`
+-- ----------------------------
+DROP TABLE IF EXISTS `user_profile`;
+CREATE TABLE `user_profile` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `modified_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `users`
@@ -157,8 +206,9 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `role_id` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `username` varchar(200) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
   `last_access` datetime NOT NULL,
   `created_at` datetime NOT NULL,
   `modified_at` datetime NOT NULL,
@@ -166,8 +216,9 @@ CREATE TABLE `users` (
   `flags` enum('normal','deleted') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `username` (`username`),
   KEY `role_id` (`role_id`),
-  KEY `email_password` (`email`,`password`),
+  KEY `identity` (`email`,`password`,`username`) USING BTREE,
   CONSTRAINT `users_role_id` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
@@ -175,7 +226,7 @@ CREATE TABLE `users` (
 --  Records of `users`
 -- ----------------------------
 BEGIN;
-INSERT INTO `users` VALUES ('1', 'User', 'teepluss@gmail.com', 'xxxxx', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal');
+INSERT INTO `users` VALUES ('1', 'User', 'teepluss', 'teepluss@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -64,9 +64,16 @@ class MY_Lang extends MX_Lang {
 				if (!$this->is_ignores($current_uri) and trim($current_uri, '/') != '') {
 					$local = $this->localized($current_uri);
 					
-					$direct = $CFG->config['base_url'].$local;
+					// find the right url
+					$base_path = $CFG->config['base_url'];
+					$base_host = parse_url($base_path, PHP_URL_HOST);
+					$base = str_replace($base_host, $_SERVER['HTTP_HOST'], $base_path);
+					
+					// path to redirect
+					$direct = $base.$local;
+					
 					// do the redirect
-					header("Location: ".$direct, true, 302);
+					header('Location: '.$direct, true, 302);
 					exit(0);
 				}			
 			} // end if auto accept
