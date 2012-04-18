@@ -371,9 +371,8 @@ class TemplateBase {
          }
       }
       
-      $content = $this->CI->load->view($view, $data, TRUE);
+      $content = $this->CI->load->view($view, $data, FALSE);
       $this->write($region, $content, $overwrite);
-
    }
    
    // --------------------------------------------------------------------

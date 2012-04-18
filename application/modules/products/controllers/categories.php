@@ -10,7 +10,9 @@ class Categories extends MY_Controller {
 	public function records()
 	{
 		// user manage items  
-		echo modules::run('terms/_records', 'products');
+		$content = modules::run('terms/_records', 'products');
+		$this->template->write('content', $content);
+		$this->template->render();
 	}
 	
 	public function add()

@@ -1,6 +1,6 @@
 <?php
 
-class Terms extends CI_Controller {
+class Terms extends MX_Controller {
 	
 	public function __construct()
 	{
@@ -9,17 +9,17 @@ class Terms extends CI_Controller {
 
 	public function _records($slug)
 	{
+		$this->load->model('model_terms', 'terms');
+		$view['entries'] = $this->terms->getItems();
 		// manage term with filter user_id
-		$this->template->write_view('content', 'admin-add');
-		$this->template->render();
+		return $this->load->view('admin-add', $view, true);
 	}
 	
 	public function _add($slug)
 	{
 		if ($this->input->is_post()) 
 		{
-			// action
-			echo "Hey";
+			// do something
 		}
 		// template render
 	}
