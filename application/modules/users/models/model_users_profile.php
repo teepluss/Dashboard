@@ -1,6 +1,6 @@
 <?php
 
-class model_user_profile extends MY_Model {
+class model_users_profile extends MY_Model {
 
 	public function __construct()
 	{
@@ -14,7 +14,7 @@ class model_user_profile extends MY_Model {
 	public function getItem($id)
 	{
 		$sql = CIDb::select();
-		$sql->from('user_profile')
+		$sql->from('users_profile')
 			->where('user_id=?', $id);
 			
 		return CIDb::fetchRow($sql);

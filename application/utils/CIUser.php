@@ -52,11 +52,11 @@ class CIUser {
 			// look up from the database
 			$CI =& get_instance();
 			$CI->load->model('users/model_users', 'users');
-			$CI->load->model('users/model_user_profile', 'user_profile');
+			$CI->load->model('users/model_users_profile', 'users_profile');
 			
 			// get account & profile
 			$account = $CI->users->getItem($id);
-			$profile = $CI->user_profile->getItem($id);
+			$profile = $CI->users_profile->getItem($id);
 			
 			// formatting user info
 			$user_info = array(

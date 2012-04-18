@@ -49,9 +49,9 @@ class MY_Controller extends MX_Controller {
 		}
 		
 		// add relation between roles and resources
-		$this->load->model('roles/model_roles_resources', 'roles_resources');
-		$roles_resources = $this->roles_resources->getRolesResources();
-		foreach ($roles_resources as $role_id => $resources)
+		$this->load->model('roles/model_roles_has_resources', 'roles_has_resources');
+		$roles_has_resources = $this->roles_has_resources->getRolesResources();
+		foreach ($roles_has_resources as $role_id => $resources)
 		{
 			foreach ($resources as $resource)
 			{
