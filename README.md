@@ -30,11 +30,11 @@ Easy install
 * Add i18n for multi language site support
 * Add Access Control List using Zend ACL
 * Add [Twitter Bootstap](http://twitter.github.com/bootstrap/) to build Core GUI
+* Add Authenticate using Zend Auth
 * Support Master/Slave database
 
 ## What is in the plan? 
 
-* Add Authenticate using Zend Auth
 * Add Zend Date to control date display
 * Add Zend Cache to increase performance
 * Hack CI Router to make multiple sub-domain, sub-path, domain for users
