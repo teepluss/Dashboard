@@ -11,7 +11,7 @@
  Target Server Version : 50509
  File Encoding         : utf-8
 
- Date: 04/19/2012 10:17:24 AM
+ Date: 04/19/2012 14:36:37 PM
 */
 
 SET NAMES utf8;
@@ -190,32 +190,48 @@ COMMIT;
 DROP TABLE IF EXISTS `terms`;
 CREATE TABLE `terms` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `pub_id` bigint(20) DEFAULT NULL,
   `vocabulary_id` int(10) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `description` text NOT NULL,
-  `weight` mediumint(5) DEFAULT NULL,
+  `weight` mediumint(5) DEFAULT '0',
   `created_at` datetime NOT NULL,
   `modified_at` datetime NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `flags` enum('normal','deleted') NOT NULL DEFAULT 'normal',
   PRIMARY KEY (`id`),
   KEY `user_id_vocabulary_id` (`user_id`,`vocabulary_id`) USING BTREE
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Records of `terms`
+-- ----------------------------
+BEGIN;
+INSERT INTO `terms` VALUES ('1', null, null, '1', 'A', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('2', null, null, '1', 'B', '', '-1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('3', null, null, '1', 'C', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('4', null, null, '1', 'B-1', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('5', null, null, '1', 'B-2', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('6', null, null, '1', 'B-1-1', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('7', null, null, '1', 'B-1-2', '', '-1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('8', null, null, '1', 'B-1-1-1', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal');
+COMMIT;
 
 -- ----------------------------
 --  Table structure for `terms_hierarchies`
 -- ----------------------------
 DROP TABLE IF EXISTS `terms_hierarchies`;
 CREATE TABLE `terms_hierarchies` (
-  `user_id` int(10) NOT NULL DEFAULT '0',
+  `user_id` bigint(20) NOT NULL DEFAULT '0',
+  `pub_id` bigint(20) NOT NULL,
   `term_id` int(10) NOT NULL DEFAULT '0',
-  `term_parent_id` int(10) DEFAULT NULL,
-  PRIMARY KEY (`term_id`),
+  `term_parent_id` int(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`term_id`,`term_parent_id`),
   KEY `term_id` (`term_id`),
   KEY `term_parent_id` (`term_parent_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Records of `terms_hierarchies`
+-- ----------------------------
+BEGIN;
+INSERT INTO `terms_hierarchies` VALUES ('0', '0', '1', '0'), ('0', '0', '2', '0'), ('0', '0', '3', '0'), ('0', '0', '4', '2'), ('0', '0', '5', '2'), ('0', '0', '6', '4'), ('0', '0', '7', '4'), ('0', '0', '8', '6');
+COMMIT;
 
 -- ----------------------------
 --  Table structure for `users`
