@@ -47,7 +47,7 @@ $config['rest_realm'] = 'REST API';
 |	'' = no login required, 'basic' = unsecure login, 'digest' = more secure login
 |
 */
-$config['rest_auth'] = false;
+$config['rest_auth'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,7 +99,7 @@ $config['rest_valid_logins'] = array('admin' => '1234');
 |	 restrict certain methods to IPs in your whitelist
 |
 */
-$config['rest_ip_whitelist_enabled'] = false;
+$config['rest_ip_whitelist_enabled'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

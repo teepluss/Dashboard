@@ -21,10 +21,10 @@ class Example extends REST_Controller {
 		'action_get' => array('level' => 1, 'limit' => 100)
 	);
 
-	public function index_get()
+	public function feed_get()
     {
     	$users = array(
-			1 => array('id' => 1, 'name' => 'Some Guy', 'email' => 'example1@example.com', 'fact' => 'Loves swimming'),
+			1 => array('id' => 1, 'name' => 'One', 'email' => 'example1@example.com', 'fact' => 'Loves swimming'),
 			2 => array('id' => 2, 'name' => 'Person Face', 'email' => 'example2@example.com', 'fact' => 'Has a huge face'),
 			3 => array('id' => 3, 'name' => 'Scotty', 'email' => 'example3@example.com', 'fact' => 'Is a Scott!', array(
 				'hobbies' => array('fartings', 'bikes')
@@ -45,15 +45,15 @@ class Example extends REST_Controller {
         }
         else
         {
-            throw new Exception('User not found', 404);
+            $this->response('User not found', 404);
         }
     }
     
-    public function index_post()
+    public function feed_post()
     {
         //$this->some_model->updateUser( $this->get('id') );
         $message = array(
-        	'id' => $this->get('id'), 
+        	'id' => $this->post('id'), 
         	'name' => $this->post('name'), 
         	'email' => $this->post('email'), 
         	'message' => 'ADDED!'
@@ -62,26 +62,25 @@ class Example extends REST_Controller {
         $this->response($message, 200); // 200 being the HTTP response code
     }
     
-    public function index_delete()
+    public function feed_delete()
     {
-    	//$this->some_model->deletesomething( $this->get('id') );
         $message = array(
-        	'id' => $this->get('id'), 
+        	'id' => $this->delete('id'), 
         	'message' => 'DELETED!'
         );
         
         $this->response($message, 200); // 200 being the HTTP response code
     }
 
-	public function index_put()
+	public function feed_put()
 	{
 		$message = array(
-        	'id' => $this->get('id'), 
+        	'id' => $this->put('id'), 
         	'message' => 'UPDATED!'
         );        
         $this->response($message, 200);
 	}
-	
+
 	public function some_get()
 	{
 		$message = array(
