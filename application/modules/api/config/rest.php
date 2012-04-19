@@ -158,7 +158,7 @@ $config['rest_keys_table'] = 'api_keys';
 	  `ignore_limits` tinyint(1) NOT NULL DEFAULT '0',
 	  `date_created` int(11) NOT NULL,
 	  PRIMARY KEY (`id`)
-	) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 |
 */
 $config['rest_enable_keys'] = FALSE;
@@ -174,7 +174,7 @@ $config['rest_enable_keys'] = FALSE;
 |	Max: 40
 |
 */
-$config['rest_key_length'] = 32;
+$config['rest_key_length'] = 40;
 
 /*
 |--------------------------------------------------------------------------

@@ -7,6 +7,7 @@
  * all done with a hardcoded array.
  *
  * example call: http://domain.com/api/example/id/1/format/json
+ * curl http://dashboard.com/api/2.0/example --request POST -d "key=7c3b42d71283730d56d4483a7c11ba88f4f4e5bf"
  *
  * @package		CodeIgniter
  * @subpackage	Rest Server
@@ -14,13 +15,13 @@
  * @author		Phil Sturgeon
  * @link		http://philsturgeon.co.uk/code/
 */
-class Example_rest extends REST_Controller {
+class Example extends REST_Controller {
 
 	protected $methods = array(
 		'action_get' => array('level' => 1, 'limit' => 100)
 	);
 
-	public function action_get()
+	public function index_get()
     {
     	$users = array(
 			1 => array('id' => 1, 'name' => 'Some Guy', 'email' => 'example1@example.com', 'fact' => 'Loves swimming'),
@@ -42,14 +43,13 @@ class Example_rest extends REST_Controller {
         	$user = $users[$id];
             $this->response($user, 200); // 200 being the HTTP response code
         }
-
         else
         {
             throw new Exception('User not found', 404);
         }
     }
     
-    public function action_post()
+    public function index_post()
     {
         //$this->some_model->updateUser( $this->get('id') );
         $message = array(
@@ -62,7 +62,7 @@ class Example_rest extends REST_Controller {
         $this->response($message, 200); // 200 being the HTTP response code
     }
     
-    public function action_delete()
+    public function index_delete()
     {
     	//$this->some_model->deletesomething( $this->get('id') );
         $message = array(
@@ -73,7 +73,7 @@ class Example_rest extends REST_Controller {
         $this->response($message, 200); // 200 being the HTTP response code
     }
 
-	public function action_put()
+	public function index_put()
 	{
 		$message = array(
         	'id' => $this->get('id'), 
@@ -81,4 +81,23 @@ class Example_rest extends REST_Controller {
         );        
         $this->response($message, 200);
 	}
+	
+	public function some_get()
+	{
+		$message = array(
+			'id' => $this->get('id'),
+        	'message' => 'SOME GET!'
+        );        
+        $this->response($message, 200);
+	}
+	
+	public function some_put()
+	{
+		$message = array(
+			'id' => $this->put('id'),
+        	'message' => 'SOME POST!'
+        );        
+        $this->response($message, 200);
+	}
+	
 }

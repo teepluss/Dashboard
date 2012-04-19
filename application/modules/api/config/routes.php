@@ -2,10 +2,14 @@
 
 /**
  * Rewrite apis endpoint
- * Target      : /api/[controller]/[parameter]
- * Destination : /api/[controller]_rest/[controller]/[parameter]
+ * Target      : /api/[version]/[controller]/
+ * Destination : /api/[controller]/index
+ *
+ * Target      : /api/[version]/[controller]/[method]
+ * Destination : /api/[controller]/[method]
  * 
  * @var mixed
  * @access public
  */
-$route['api/2.0/([a-z]+)(.*)?'] = "$1_rest/action$2";
+$route['api/2.0/([a-z]+)/?'] = "$1/index";
+$route['api/2.0/([a-z]+)/(.*)'] = "$1/$2";

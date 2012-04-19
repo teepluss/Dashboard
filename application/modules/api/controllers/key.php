@@ -12,20 +12,14 @@
  * @link		http://philsturgeon.co.uk/code/
 */
 
-class Keys extends REST_Controller
+class Key extends REST_Controller
 {
 	protected $methods = array(
-		'index_put'       => array('level' => 10, 'limit' => 10),
-		'index_delete'    => array('level' => 10),
-		'level_post'      => array('level' => 10),
+		'index_put' => array('level' => 10, 'limit' => 10),
+		'index_delete' => array('level' => 10),
+		'level_post' => array('level' => 10),
 		'regenerate_post' => array('level' => 10),
 	);
-	
-	public function __construct()
-	{
-		parent::__construct();
-		$this->load->database();
-	}
 
 	/**
 	 * Key Create
