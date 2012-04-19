@@ -11,7 +11,7 @@
  Target Server Version : 50509
  File Encoding         : utf-8
 
- Date: 04/19/2012 00:45:23 AM
+ Date: 04/19/2012 10:17:24 AM
 */
 
 SET NAMES utf8;
@@ -218,27 +218,6 @@ CREATE TABLE `terms_hierarchies` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `terms_vocabularies`
--- ----------------------------
-DROP TABLE IF EXISTS `terms_vocabularies`;
-CREATE TABLE `terms_vocabularies` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `slug` varchar(50) NOT NULL,
-  `comment` longtext,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `slug` (`slug`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Records of `terms_vocabularies`
--- ----------------------------
-BEGIN;
-INSERT INTO `terms_vocabularies` VALUES ('1', 'Publisher Types', 'A main terms of publisher', 'publisher_types', null), ('2', 'Publisher Products Types', 'A main terms of products', 'product_types', null), ('3', 'Products Types', 'Publisher products terms', 'products', null);
-COMMIT;
-
--- ----------------------------
 --  Table structure for `users`
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
@@ -282,5 +261,26 @@ CREATE TABLE `users_profile` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `vocabularies`
+-- ----------------------------
+DROP TABLE IF EXISTS `vocabularies`;
+CREATE TABLE `vocabularies` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `slug` varchar(50) NOT NULL,
+  `comment` longtext,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`slug`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Records of `vocabularies`
+-- ----------------------------
+BEGIN;
+INSERT INTO `vocabularies` VALUES ('1', 'Publisher Types', 'A main terms of publisher', 'publisher_types', null), ('2', 'Publisher Products Types', 'A main terms of products', 'product_types', null), ('3', 'Products Types', 'Publisher products terms', 'products', null);
+COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
