@@ -10,14 +10,15 @@ class Admin extends MY_Controller {
 	public function manage()
 	{
 		$this->load->model('model_terms', 'terms');
+
 		
-		$tree = $this->terms->build(1)->getTree(0);
+		$tree = $this->terms->build(1, null, 1)->getTree(0);
 		//alert( $tree );
 		
 		$childIds = $this->terms->build(1)->getChildIds(2);
-		//alert( $childIds, true );
+		//alert( $childIds );
 		
-		$parentPathIds = $this->terms->build(1)->getParentNodes(8);
+		$parentPathIds = $this->terms->build(1, null, 1)->getParentNodes(8);
 		alert( $parentPathIds, true );
 	}
 	

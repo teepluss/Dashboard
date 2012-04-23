@@ -20,9 +20,9 @@ class model_terms extends MY_Model {
 
 		if (strlen($vid) > 0) $sql->where('vocabulary_id=?', $vid);
 		
-		if (strlen($pub_id) > 0) $sql->where('pub_id=?', $pub_id);
+		if (strlen($pub_id) > 0) $sql->where('t.pub_id=?', $pub_id);
 
-		$entries = CIDb::fetchAll($sql);
+		$entries = CIDb::fetchIndex($sql);
 		
 		return $entries;
 	}
@@ -59,25 +59,25 @@ class model_terms extends MY_Model {
 	
 	public function build($vid, $pub_id=null, $status=null)
 	{
-		$parent_id = 0;
-	
+		$parent_id = 0;	
 		$entries = $this->getTerms($vid, $pub_id);
-		$terms = array();
 		
-		if (count($entries) > 0) foreach ($entries as $entry)
-		{
-			if (!is_null($status)) 
+		// filter status
+		if (!is_null($status)) {
+			if (!function_exists('walk_terms_status'))
 			{
-				if (strcmp($entry['active'], $status) == 0) {
-					$terms[$entry['id']] = $entry;
-				}				
+				function walk_terms_status(&$value, $key, $status)
+				{
+					if ($value['active'] == $status) {
+						$GLOBALS['terms'][$key] = $value;
+					}
+				}
 			}
-			else 
-			{
-				$terms[$entry['id']] = $entry;
-			}
-		}
-		$this->_tree = $this->buildTree($terms);
+			array_walk($entries, 'walk_terms_status', $status);
+			$entries = @$GLOBALS['terms'];
+		}		
+		
+		$this->_tree = $this->buildTree($entries);
 		return $this;
 	}
 	
@@ -121,10 +121,11 @@ class model_terms extends MY_Model {
 		}
 		
 		$response = $this->_tree['entries'];
-				
+	
 		if (isset($response[$term_id]))
 		{
 			$item = $response[$term_id];
+			
 			if ($item['parent_id'] != 0) 
 			{			
 				$parent_id = $item['parent_id'];
