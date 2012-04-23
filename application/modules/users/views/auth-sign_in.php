@@ -9,7 +9,8 @@
 	<input type="text" class="input-small" placeholder="Email" name="username">
     <input type="password" class="input-small" placeholder="Password" name="password">
     <label class="checkbox">
-    	<input type="checkbox" name="remember"> Remember me
+    	<input type="checkbox" name="remember"><?php _e('Remember me'); ?>
     </label>
     <button type="submit" class="btn">Sign in</button>
+    <a href="<?php echo CIUri::top('users/auth/connect'); ?>" class="btn">Connect with Facebook</a>
 </form>

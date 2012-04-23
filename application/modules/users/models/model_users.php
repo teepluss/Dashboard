@@ -22,14 +22,28 @@ class model_users extends MY_Model {
 	
 	public function insert($data)
 	{
+		return CIDb::insert('users', $data);
 	}
 	
 	public function update($data, $id)
 	{
+		CIDb::update('users', $data, array(
+			CIDb::quoteInto('id=?', $id)
+		));
+		return true;
 	}
 	
 	public function delete($id)
 	{
+	}
+	
+	public function getUserIdFromDuplicate($field, $value)
+	{
+		$sql = CIDb::select();
+		$sql->from('users', 'id')
+			->where($field.'=?', $value);
+		
+		return CIDb::fetchOne($sql);
 	}
 	
 }

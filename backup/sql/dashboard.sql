@@ -11,7 +11,7 @@
  Target Server Version : 50509
  File Encoding         : utf-8
 
- Date: 04/19/2012 14:36:37 PM
+ Date: 04/23/2012 14:51:32 PM
 */
 
 SET NAMES utf8;
@@ -28,13 +28,13 @@ CREATE TABLE `api_keys` (
   `ignore_limits` tinyint(1) NOT NULL DEFAULT '0',
   `date_created` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `api_keys`
 -- ----------------------------
 BEGIN;
-INSERT INTO `api_keys` VALUES ('2', 'd93247f5913128b1f91b0c657afc7080', '1', '0', '1333274945');
+INSERT INTO `api_keys` VALUES ('4', '7b7ecd6b708340da94fa08134c46f34c2fce159b', '10', '1', '1334851066'), ('7', '009a25f7e606b52fa3587d531df4f1b44d930565', '1', '1', '1334852251');
 COMMIT;
 
 -- ----------------------------
@@ -51,14 +51,7 @@ CREATE TABLE `api_logs` (
   `time` int(11) NOT NULL,
   `authorized` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Records of `api_logs`
--- ----------------------------
-BEGIN;
-INSERT INTO `api_logs` VALUES ('1', 'api/example', 'get', 'a:0:{}', '', '127.0.0.1', '1333273726', '0'), ('2', 'api/example', 'get', 'a:0:{}', '', '127.0.0.1', '1333273727', '0'), ('3', 'api/example', 'get', 'a:0:{}', '', '127.0.0.1', '1333273727', '0'), ('4', 'api/example', 'get', 'a:0:{}', '', '127.0.0.1', '1333273764', '0'), ('5', 'api/keys_rest', 'get', 'a:0:{}', '', '127.0.0.1', '1333274279', '0'), ('6', 'api/keys_rest', 'get', 'a:0:{}', '', '127.0.0.1', '1333274301', '0'), ('7', 'api/keys', 'get', 'a:0:{}', '', '127.0.0.1', '1333274306', '0'), ('8', 'api/keys_rest/index', 'get', 'a:0:{}', '', '127.0.0.1', '1333274385', '1'), ('9', 'api/keys_rest/index', 'get', 'a:0:{}', '', '127.0.0.1', '1333274386', '1'), ('10', 'api/keys_rest/index', 'get', 'a:0:{}', '', '127.0.0.1', '1333274386', '1'), ('11', 'api/keys_rest/index', 'get', 'a:0:{}', '', '127.0.0.1', '1333274440', '1'), ('12', 'api/keys_rest/index', 'get', 'a:0:{}', '', '127.0.0.1', '1333274441', '1'), ('13', 'api/x/example', 'get', 'a:0:{}', '', '127.0.0.1', '1333274469', '1'), ('14', 'api/2.0/example', 'get', 'a:0:{}', '', '127.0.0.1', '1333274492', '1'), ('15', 'api/keys', 'get', 'a:0:{}', '', '127.0.0.1', '1333274641', '1'), ('16', 'api/keys', 'put', 'a:0:{}', '', '127.0.0.1', '1333274661', '1'), ('17', 'api/keys', 'get', 'a:0:{}', '', '127.0.0.1', '1333274756', '1'), ('18', 'api/keys', 'put', 'a:0:{}', '', '127.0.0.1', '1333274759', '1'), ('19', 'api/keys', 'get', 'a:0:{}', '', '127.0.0.1', '1333274940', '1'), ('20', 'api/keys', 'put', 'a:0:{}', '', '127.0.0.1', '1333274945', '1'), ('21', 'api/2.0/example', 'get', 'a:0:{}', '', '127.0.0.1', '1333274982', '1'), ('22', 'api/2.0/example', 'get', 'a:0:{}', '', '127.0.0.1', '1333275103', '0'), ('23', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275124', '1'), ('24', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275160', '1'), ('25', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275160', '1'), ('26', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275160', '1'), ('27', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275170', '1'), ('28', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275171', '1'), ('29', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275171', '1'), ('30', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275171', '1'), ('31', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275229', '1'), ('32', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275229', '1'), ('33', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275230', '1'), ('34', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275230', '1'), ('35', 'api/keys', 'get', 'a:0:{}', '', '127.0.0.1', '1333275408', '0'), ('36', 'api/keys', 'get', 'a:0:{}', '', '127.0.0.1', '1333275409', '0'), ('37', 'api/keys', 'get', 'a:0:{}', '', '127.0.0.1', '1333275409', '0'), ('38', 'api/keys', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275416', '1'), ('39', 'api/keys', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275418', '1'), ('40', 'api/keys', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275418', '1'), ('41', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275606', '1'), ('42', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275607', '1'), ('43', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275641', '1'), ('44', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275693', '1'), ('45', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275693', '1'), ('46', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275693', '1'), ('47', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275794', '1'), ('48', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275946', '0'), ('49', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275947', '0'), ('50', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275974', '0'), ('51', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275997', '1'), ('52', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275997', '1'), ('53', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275998', '1'), ('54', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275998', '1'), ('55', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275998', '1'), ('56', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275999', '1'), ('57', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333275999', '1'), ('58', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333276214', '1'), ('59', 'api/2.0/example', 'get', 'a:1:{s:9:\"X-API-KEY\";s:32:\"d93247f5913128b1f91b0c657afc7080\";}', 'd93247f5913128b1f91b0c657afc7080', '127.0.0.1', '1333276299', '1'), ('60', 'api/2.0/example', 'get', 'a:0:{}', '', '127.0.0.1', '1333277170', '0'), ('61', 'api/2.0/example', 'get', 'a:0:{}', '', '127.0.0.1', '1333277189', '0');
-COMMIT;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `api_rate_limits`
@@ -71,14 +64,23 @@ CREATE TABLE `api_rate_limits` (
   `hour_started` int(11) NOT NULL,
   `api_key` varchar(40) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Records of `api_rate_limits`
+--  Table structure for `onetime_password`
 -- ----------------------------
-BEGIN;
-INSERT INTO `api_rate_limits` VALUES ('1', 'api/2.0/example', '12', '1333275946', 'd93247f5913128b1f91b0c657afc7080');
-COMMIT;
+DROP TABLE IF EXISTS `onetime_password`;
+CREATE TABLE `onetime_password` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `token` varchar(50) NOT NULL,
+  `values` longtext,
+  `created_at` datetime NOT NULL,
+  `modified_at` datetime NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `flags` enum('normal','deleted') NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `token` (`token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Table structure for `open_ids`
@@ -91,10 +93,17 @@ CREATE TABLE `open_ids` (
   `uid` bigint(30) NOT NULL,
   `access_token` longtext,
   `created_at` datetime NOT NULL,
-  `modified_at` datetime NOT NULL,
+  `modified_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `service_user_id` (`service`,`uid`) USING BTREE
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Records of `open_ids`
+-- ----------------------------
+BEGIN;
+INSERT INTO `open_ids` VALUES ('4', '7', 'facebook', '100000389829908', null, '2012-04-23 14:50:36', null);
+COMMIT;
 
 -- ----------------------------
 --  Table structure for `publishers`
@@ -202,13 +211,13 @@ CREATE TABLE `terms` (
   `flags` enum('normal','deleted') NOT NULL DEFAULT 'normal',
   PRIMARY KEY (`id`),
   KEY `user_id_vocabulary_id` (`user_id`,`vocabulary_id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `terms`
 -- ----------------------------
 BEGIN;
-INSERT INTO `terms` VALUES ('1', null, null, '1', 'A', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('2', null, null, '1', 'B', '', '-1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('3', null, null, '1', 'C', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('4', null, null, '1', 'B-1', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('5', null, null, '1', 'B-2', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('6', null, null, '1', 'B-1-1', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('7', null, null, '1', 'B-1-2', '', '-1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('8', null, null, '1', 'B-1-1-1', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal');
+INSERT INTO `terms` VALUES ('1', null, null, '1', 'A', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('2', null, null, '1', 'B', '', '-1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('3', null, null, '1', 'C', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('4', null, null, '1', 'B-1', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('5', null, null, '1', 'B-2', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('6', null, null, '1', 'B-1-1', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('7', null, null, '1', 'B-1-2', '', '-1', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('8', null, null, '1', 'B-1-1-1', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('9', null, null, '1', 'B-1-1-1-1', '', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal');
 COMMIT;
 
 -- ----------------------------
@@ -230,7 +239,7 @@ CREATE TABLE `terms_hierarchies` (
 --  Records of `terms_hierarchies`
 -- ----------------------------
 BEGIN;
-INSERT INTO `terms_hierarchies` VALUES ('0', '0', '1', '0'), ('0', '0', '2', '0'), ('0', '0', '3', '0'), ('0', '0', '4', '2'), ('0', '0', '5', '2'), ('0', '0', '6', '4'), ('0', '0', '7', '4'), ('0', '0', '8', '6');
+INSERT INTO `terms_hierarchies` VALUES ('0', '0', '1', '0'), ('0', '0', '2', '0'), ('0', '0', '3', '0'), ('0', '0', '4', '2'), ('0', '0', '5', '2'), ('0', '0', '6', '4'), ('0', '0', '7', '4'), ('0', '0', '8', '6'), ('0', '0', '9', '8');
 COMMIT;
 
 -- ----------------------------
@@ -239,13 +248,13 @@ COMMIT;
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `role_id` varchar(50) NOT NULL,
-  `username` varchar(200) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
+  `role_id` varchar(50) NOT NULL DEFAULT 'User',
+  `username` varchar(200) NOT NULL DEFAULT '',
+  `email` varchar(100) NOT NULL DEFAULT '',
   `password` varchar(50) DEFAULT NULL,
-  `last_access` datetime NOT NULL,
+  `last_access` datetime DEFAULT NULL,
   `created_at` datetime NOT NULL,
-  `modified_at` datetime NOT NULL,
+  `modified_at` datetime DEFAULT NULL,
   `active` tinyint(4) NOT NULL DEFAULT '0',
   `flags` enum('normal','deleted') NOT NULL,
   PRIMARY KEY (`id`),
@@ -254,13 +263,13 @@ CREATE TABLE `users` (
   KEY `role_id` (`role_id`),
   KEY `identity` (`email`,`password`,`username`) USING BTREE,
   CONSTRAINT `users_role_id` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `users`
 -- ----------------------------
 BEGIN;
-INSERT INTO `users` VALUES ('1', 'User', 'teepluss', 'teepluss@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal');
+INSERT INTO `users` VALUES ('1', 'User', 'teepluss', 'teepluss@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('7', 'User', 'facebook100000389829908', 'jquerytips@hotmail.com', null, '2012-04-23 14:50:37', '2012-04-23 14:50:36', null, '1', 'normal');
 COMMIT;
 
 -- ----------------------------

@@ -12,7 +12,7 @@ class Auth extends MY_Controller {
 		redirect('/users/auth/sign_in');
 	}
 	
-	public function sign_in()
+	public function sign_in($token=null)
 	{
 		$view = array();
 
@@ -62,6 +62,10 @@ class Auth extends MY_Controller {
 				// store session
 				$this->auth->storeUserId($user_id, $rememberMe);
 				
+				// stamp time
+				$this->load->model('model_users', 'users');
+				$this->users->update(array('last_access' => CIDb::expr('NOW()')), $user_id);
+				
 				// redirection
 				$redirection = $this->input->get_post('redirect');
 				$redirection = ($redirection) ? urldecode($redirection) : '/dashboard';
@@ -94,11 +98,64 @@ class Auth extends MY_Controller {
 	
 	public function connect($service='facebook')
 	{
-		/*$this->model('model_auth', 'auth');
-		$this->auth->store(array(
-			'userId'  => $user_id,
-			'service' => $service
-		));*/
+		if (!in_array($service, array('facebook'))) {
+			show_404();
+		}
+		
+		$this->load->library('fb');
+		$user = $this->fb->api('/me');
+		
+		if (isset($user['id']))
+		{						
+			$this->load->model('model_users', 'users');
+			$this->load->model('model_open_ids', 'open_ids');
+			
+			$entry = $this->open_ids->getItemFromService($service, $user['id']);
+			if (!is_array($entry) || count($entry) == 0)
+			{
+				$email = $user['email'];	
+				if ($this->users->getUserIdFromDuplicate('email', $email)) {
+					redirect('users/register/merge/'.$service.'/'.$email.'#email_exists');
+				}
+				redirect('users/register/connect/'.$service.'/'.$email.'#connected');
+			}
+			
+			// user_id
+			$user_id = $entry['user_id'];
+			$user_data = $this->users->getItem($user_id);
+			
+			if (!is_array($user_data)) {
+				redirect('users/auth/sign_in#user_not_exists');
+			}
+			
+			if ($user_data['active'] == 0) {
+				redirect('users/auth/sign_in#user_inactive');
+			}
+			
+			// store data
+			$this->load->model('model_auth', 'auth');
+			$this->auth->store(array(
+				'userId'  => $user_data['id'],
+				'service' => $service
+			));
+			
+			// stamp time
+			$this->users->update(array('last_access' => CIDb::expr('NOW()')), $user_data['id']);
+			
+			// redirection
+			$redirection = $this->input->get_post('redirect');
+			$redirection = ($redirection) ? urldecode($redirection) : '/dashboard';
+			
+			// add fragment
+			$redirection .= '#connected';
+			redirect($redirection);
+		}
+
+		$loginUrl = $this->fb->getLoginUrl(array(
+			'scope' => 'email'
+		));		
+		redirect($loginUrl);
+		
 	}
 	
 }
