@@ -71,8 +71,9 @@ class Register extends MY_Controller {
 			}		
 		} 
 		catch (Exception $e) {
-			// duplicate user email
+			// duplicate username or email
 		}
+		redirect('users/register/user#duplicated');
 	}
 	
 	public function merge($service='facebook')
@@ -147,7 +148,7 @@ class Register extends MY_Controller {
 						$this->open_ids->insert($data);
 					}
 					catch (Exception $e) {
-						// duplicate open id
+						// duplicate open id (service, uid)
 					}
 					$this->form_validation->set_success_message('lang:OK Your account merged.');
 					redirect('users/register/merge/'.$service.'#merged');
