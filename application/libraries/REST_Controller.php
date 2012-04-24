@@ -132,9 +132,6 @@ abstract class REST_Controller extends MX_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		
-		// addition by Tee++;
-		$this->load->database();
 
 		$this->_zlib_oc = @ini_get('zlib.output_compression');
 

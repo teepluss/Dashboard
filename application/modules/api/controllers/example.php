@@ -15,7 +15,7 @@
  * @author		Phil Sturgeon
  * @link		http://philsturgeon.co.uk/code/
 */
-class Example extends REST_Controller {
+class Example extends RESTFUL_Controller {
 
 	protected $methods = array(
 		'action_get' => array('level' => 1, 'limit' => 100)

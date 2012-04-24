@@ -15,6 +15,7 @@ Easy install
 * Extract all code into the directory you want
 * Config your domain at /application/config/config.php 
 * Config the database connection in /application/config/database.php
+* Config authentication at /application/config/auth.php
 * Import database from the .sql file you'll found at /backup/sql/[name].sql
 
 ## What I've done
