@@ -37,7 +37,7 @@ function is_allowed($controller, $action, $role=null)
 {
 	// if the role is null, look up for the user session info.
 	if (is_null($role)) {
-		$role = 'Guest';
+		$role = CIUser::authInfo()->get('role_id');
 	}	
 	$CI =& get_instance();
 	return $CI->access_control->isAllowed($role, $controller, $action);

@@ -20,7 +20,7 @@ class Access_control {
 	/**
 	 * Allow if resources is not exists
 	 */
-	public $allowOnControllerNotExists = true;
+	public $allowOnControllerNotExists = false;
 	
 	/**
 	 * Construct

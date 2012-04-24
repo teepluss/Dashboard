@@ -123,7 +123,7 @@ $autoload['model'] = array();
 |
 */
 
-$autoload['utils'] = array('CIDb', 'CIUser', 'CIUri');
+$autoload['utils'] = array('CIDb', 'CIUser', 'CIUri', 'CIWidget');
 
 
 /* End of file autoload.php */

@@ -14,6 +14,9 @@ class MY_Form_validation extends CI_Form_validation {
 	 */
 	public function wrap_error_string($message)
 	{
+		if (!$message) {
+			return;
+		}
 		$message = $this->_translate_fieldname($message);
 		return $this->_error_prefix.$message.$this->_error_suffix;
 	}
@@ -28,6 +31,9 @@ class MY_Form_validation extends CI_Form_validation {
 	 */
 	public function set_success_message($message, $key='success')
 	{
+		if (!$message) {
+			return;
+		}
 		$this->CI->load->library('session');
 		$message = $this->_translate_fieldname($message);		
 		$this->CI->session->set_flashdata($key, $message);
@@ -45,8 +51,13 @@ class MY_Form_validation extends CI_Form_validation {
 	{
 		$this->CI->load->library('session');
 		$message = $this->CI->session->flashdata($key);
+		
+		if (!$message) {
+			return;
+		}
+		
 		if ($wrap == false) {
-			return $message
+			return $message;
 		}
 		return $this->_error_prefix.$message.$this->_error_suffix;
 	}

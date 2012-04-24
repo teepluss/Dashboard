@@ -17,4 +17,14 @@ class model_roles_has_resources extends MY_Model {
 		return CIDb::fetchGroup($sql, array(), 'role_id');
 	}
 	
+	public function insert($data)
+	{
+		return CIDb::insert('roles_has_resources', $data);
+	}
+	
+	public function deleteSpecificCretiria($criteria)
+	{
+		return CIDb::delete('roles_has_resources', $criteria);
+	}
+	
 }

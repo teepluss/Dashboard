@@ -7,6 +7,11 @@ class Register extends MY_Controller {
 		parent::__construct();
 	}
 	
+	public function index() 
+	{
+		redirect('users/register/user');
+	}
+	
 	public function user()
 	{
 		if ($this->input->is_post())

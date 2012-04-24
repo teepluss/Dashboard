@@ -81,10 +81,6 @@ class MY_Controller extends MX_Controller {
 		
 		// get current role
 		$auth_role_id = CIUser::authInfo()->get('role_id');
-		$auth_role_id || $auth_role_id = $this->acl->getDefaultRole();
-
-		// suppose role id God
-		$auth_role_id = 'God';
 		
 		if (!$this->acl->isAllowed($auth_role_id, $this->_controller, $this->_action)) {
 			// the error report on development environment only

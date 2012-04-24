@@ -17,7 +17,9 @@
         	<?php if (CIUser::isLoggedIn()) : ?>
         	<span>Logged in as</span>
         	<a href="<?php echo CIUri::base('dashboard/user'); ?>"><?php echo CIUser::authInfo()->get('username'); ?></a>
+        	<?php if (is_allowed('dashboard:admin', 'index')) : ?>
         	<a href="<?php echo CIUri::base('dashboard/admin'); ?>"><span class="label label-info">Admin</span></a>
+        	<?php endif; ?>
         	<a class="btn btn-danger" href="<?php echo CIUri::base('users/auth/sign_out'); ?>">Sign Out</a>
         	<?php else : ?>
         	<a class="btn" href="<?php echo CIUri::base('users/auth/sign_in'); ?>">Sign In</a>
