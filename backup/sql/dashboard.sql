@@ -11,7 +11,7 @@
  Target Server Version : 50509
  File Encoding         : utf-8
 
- Date: 04/23/2012 14:51:32 PM
+ Date: 04/24/2012 12:19:53 PM
 */
 
 SET NAMES utf8;
@@ -96,13 +96,13 @@ CREATE TABLE `open_ids` (
   `modified_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `service_user_id` (`service`,`uid`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `open_ids`
 -- ----------------------------
 BEGIN;
-INSERT INTO `open_ids` VALUES ('4', '7', 'facebook', '100000389829908', null, '2012-04-23 14:50:36', null);
+INSERT INTO `open_ids` VALUES ('2', '10', 'facebook', '100000389829908', null, '2012-04-24 10:56:15', null);
 COMMIT;
 
 -- ----------------------------
@@ -253,6 +253,8 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL DEFAULT '',
   `password` varchar(50) DEFAULT NULL,
   `last_access` datetime DEFAULT NULL,
+  `registered` enum('web','facebook','twitter') NOT NULL DEFAULT 'web',
+  `verified` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
   `modified_at` datetime DEFAULT NULL,
   `active` tinyint(4) NOT NULL DEFAULT '0',
@@ -263,13 +265,13 @@ CREATE TABLE `users` (
   KEY `role_id` (`role_id`),
   KEY `identity` (`email`,`password`,`username`) USING BTREE,
   CONSTRAINT `users_role_id` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 --  Records of `users`
 -- ----------------------------
 BEGIN;
-INSERT INTO `users` VALUES ('1', 'User', 'teepluss', 'teepluss@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('7', 'User', 'facebook100000389829908', 'jquerytips@hotmail.com', null, '2012-04-23 14:50:37', '2012-04-23 14:50:36', null, '1', 'normal');
+INSERT INTO `users` VALUES ('1', 'User', 'teepluss', 'teepluss@gmail.com', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '0000-00-00 00:00:00', 'web', '0', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', 'normal'), ('10', 'User', 'facebook100000389829908', 'jquerytips@hotmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '2012-04-24 11:33:58', 'facebook', '1', '2012-04-23 15:14:58', null, '1', 'normal');
 COMMIT;
 
 -- ----------------------------
