@@ -17,7 +17,7 @@ class CIUser {
 		$authInfo = $CI->auth->read();
 		
 		// user is not logged in
-		if (!$authInfo) {
+		if (!is_array($authInfo) || !isset($authInfo['loggedIn'])) {
 			return false;
 		}
 		

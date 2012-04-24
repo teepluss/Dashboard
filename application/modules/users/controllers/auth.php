@@ -115,9 +115,9 @@ class Auth extends MY_Controller {
 			{
 				$email = $user['email'];	
 				if ($this->users->getUserIdFromDuplicate('email', $email)) {
-					redirect('users/register/merge/'.$service.'/'.$email.'#email_exists');
+					redirect('users/register/merge/'.$service.'#email_exists');
 				}
-				redirect('users/register/connect/'.$service.'/'.$email.'#connected');
+				redirect('users/register/connect/'.$service.'#connected');
 			}
 			
 			// user_id

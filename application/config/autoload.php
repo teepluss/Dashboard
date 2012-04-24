@@ -66,7 +66,7 @@ $autoload['libraries'] = array('template');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('common', 'acl', 'language');
+$autoload['helper'] = array('common', 'acl', 'language', 'form');
 
 
 /*

@@ -23,6 +23,7 @@ class model_products extends MY_Model {
 	
 	public function getItem($id)
 	{
+	
 		$sql = CIDb::select();
 		$sql->from('products')
 			->where('id=?', $id);
