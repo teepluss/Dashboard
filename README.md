@@ -12,6 +12,7 @@ Easy install
 2. [Zend Framework](http://framework.zend.com/download/current/) Installed
 
 ## Installation
+* Allow write permission on /data/*
 * Download Zend and add include path in php.ini
 * Extract all code into the directory you want
 * Config your domain at /application/config/config.php 
