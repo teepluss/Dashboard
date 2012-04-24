@@ -30,7 +30,12 @@ class Register extends MY_Controller {
 		}
 		
 		$this->load->library('fb');
-		$user = $this->fb->api('/me');
+		
+		// get data from Facebook
+		try {
+			$user = $this->fb->api('/me');
+		} 
+		catch (Exception $e) { $user = array();	}
 		
 		if (!isset($user['id'])) {
 			redirect('users/auth/sign_in#connect_failed');
@@ -86,7 +91,11 @@ class Register extends MY_Controller {
 			$view['success'] = $success;
 		}
 		
-		$user = $this->fb->api('/me');
+		// get data from Facebook
+		try {
+			$user = $this->fb->api('/me');
+		} 
+		catch (Exception $e) { $user = array();	}
 		
 		if (!isset($user['id'])) {
 			redirect('users/auth/sign_in#connect_failed');

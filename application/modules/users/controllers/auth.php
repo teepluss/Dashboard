@@ -84,8 +84,13 @@ class Auth extends MY_Controller {
 	
 	public function sign_out()
 	{
+		// clear system log in
 		$this->load->model('model_auth', 'auth');
 		$this->auth->clear();
+		
+		// clear facebook log in
+		$this->load->library('fb');
+		$this->fb->clear();
 		
 		// redirection
 		$redirection = $this->input->get_post('redirect');
@@ -103,7 +108,12 @@ class Auth extends MY_Controller {
 		}
 		
 		$this->load->library('fb');
-		$user = $this->fb->api('/me');
+
+		// get data from Facebook
+		try {
+			$user = $this->fb->api('/me');
+		} 
+		catch (Exception $e) { $user = array();	}
 		
 		if (isset($user['id']))
 		{						
