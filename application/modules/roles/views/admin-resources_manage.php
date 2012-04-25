@@ -6,6 +6,16 @@
 		</div><!--/.well -->
 	</div><!--/span-->
 	<div class="span9">
+		
+		<div class="page-header clearfix">
+			<h1 class="pull-left"><?php _e('Manage Resource'); ?></h1>		
+			<div class="pull-right">
+		        <a class="btn btn-primary" href="<?php echo CIUri::base('roles/admin/resources_add/'.$role['id']); ?>">
+		        	<i class="icon-plus icon-white"></i>
+		        	<?php _e('Add new resource'); ?>
+		        </a>
+			</div>
+		</div>
 	
 		<?php if (isset($success)) : ?>
 		<div class="alert alert-success">
@@ -19,13 +29,13 @@
 			<?php echo form_open('roles/admin/resources_manage/'.$role['id']); ?>
 			<?php foreach ($groups as $group => $resources) : ?>
 			<h3><?php echo $group; ?></h3>
-			<table class="table table-bordered">
+			<table class="table table-bordered table-striped">
 	   			<thead>
 	   				<tr>
 	   					<th><?php _e('Allow/Deny'); ?></th>
 	   					<th><?php _e('Controller'); ?></th>
 	   					<th><?php _e('Action'); ?></th>
-	   					<th><?php _e('Description'); ?></th>
+	   					<th colspan="2"><?php _e('Description'); ?></th>
 	      			</tr>
 	   			</thead>
 	   			<tbody>
@@ -39,6 +49,10 @@
 	   					<td width="180"><?php echo $resource['controller']; ?></td>
 	   					<td width="100"><?php echo $resource['action']; ?></td>
 	   					<td><?php echo $resource['description']; ?></td>
+	   					<td width="35" class="actions">
+	   						<a class="icon-edit" href="<?php echo CIUri::base(''); ?>"></a>
+	   						<a class="icon-remove alert-confirm-remove" href="<?php echo CIUri::base(''); ?>"></a>
+	   					</td>
 	   				</tr>
 	   				<?php endforeach; ?>
 	   			</tbody>

@@ -6,7 +6,7 @@
 		</div><!--/.well -->
 	</div><!--/span-->
 	<div class="span9">
-		<!-- Content -->
+
 		
 		<div class="hero-unit">
 			<h1>Hello, world!</h1>

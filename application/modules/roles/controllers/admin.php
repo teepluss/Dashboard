@@ -116,7 +116,65 @@ class Admin extends MY_Controller {
 	
 	public function resources_add($role_id)
 	{
-		// add new resource
+		$this->load->model('model_roles', 'roles');
+		$this->load->model('model_resources', 'resources');
+		$this->load->model('model_roles_has_resources', 'roles_has_resources');
+		
+		$role = $this->roles->getItem($role_id);
+		if (!is_array($role)) {
+			show_error('Content not found.');
+		}
+		
+		// in case success returned
+		if ($success = validation_success()) {
+			$view['success'] = $success;
+		}
+		
+		if ($this->input->is_post())
+		{
+			$this->load->library('form_validation');
+			if (!$this->form_validation->run('roles/admin/resources_add'))
+			{
+				$view['errors'] = validation_errors();
+			}
+			else
+			{
+				$controller = $this->input->post('controller');
+				$action = $this->input->post('action');
+				$description = $this->input->post('description');
+				$group = $this->input->post('group');
+				
+				$apply = $this->input->post('apply');
+				
+				$data = array(
+					'controller'  => $controller,
+					'action'      => $action,
+					'description' => $description,
+					'group'       => ucfirst($group)
+				);
+				$resource_id = $this->resources->insert($data);
+				
+				// auto apply this resource to selected role
+				if ($resource_id != false && $apply == 1)
+				{
+					$data = array(
+						'role_id'     => $role['id'],
+						'resource_id' => $resource_id,
+						'allow'       => 1
+					);
+					$this->roles_has_resources->insert($data);
+				}
+				
+				// set message return
+				$this->form_validation->set_success_message('lang:Resource has been added.');
+				redirect('roles/admin/resources_manage/'.$role['id'].'#added');
+			}			
+		}		
+		
+		$view['role'] = $role;
+		
+		$this->template->write_view('content', 'admin-resources_add', $view);
+		$this->template->render();
 	}
 	
 	public function resources_edit($role_id, $id)

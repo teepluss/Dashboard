@@ -30,4 +30,9 @@ class model_resources extends MY_Model {
 		return CIDb::fetchAll($sql);
 	}
 	
+	public function insert($data)
+	{
+		return CIDb::insert('resources', $data);
+	}
+	
 }
